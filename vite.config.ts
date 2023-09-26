@@ -64,4 +64,19 @@ export default defineConfig({
       ]
     }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        // 打包后的文件夹名称生成规则-->解决部分静态服务器无法正常返回_plugin-vue_export-helper文件
+        sanitizeFileName(name) {
+          const match = /^[a-z]:/i.exec(name)
+          const driveLetter = match ? match[0] : ''
+          return (
+              driveLetter +
+              name.substring(driveLetter.length).replace(/[\x00-\x1F\x7F<>*#"{}|^[\]`;?:&=+$,]/g, '')
+          )
+        }
+      }
+    }
+  }
 })
