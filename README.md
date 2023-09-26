@@ -13,5 +13,5 @@ https://tsai996.github.io/lowflow-design/
 ## 一键转BPMN（暂不开源）
 ![dark.png](public%2Fdark.png)
 ![bpmn.png](public%2Fbpmn.png)
-## 加微信拉入群聊
-![wx.jpg](public%2Fwx.jpg)
+## 加微信拉入群聊（备注：加群）
+![wx.png](public%2Fwx.png)
