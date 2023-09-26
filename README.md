@@ -10,7 +10,7 @@ https://tsai996.github.io/lowflow-design/
 ## 示例图
 ![flow.png](public%2Fflow.png)
 ![penal.png](public%2Fpenal.png)
-## 一键转BPMN（暂不开源）
+## 一键转BPMN（待完善暂不开源）
 ![dark.png](public%2Fdark.png)
 ![bpmn.png](public%2Fbpmn.png)
 ## 加微信拉入群聊（备注：加群）
