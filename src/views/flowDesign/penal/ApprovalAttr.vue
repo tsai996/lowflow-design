@@ -29,11 +29,11 @@ const {node} = useVModels($props, $emits)
             <el-radio label="form_role">表单内角色</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item prop="assigneeType" label="指定人员" v-if="node.assigneeType === 'user'">
+        <el-form-item prop="users" label="指定人员" v-if="node.assigneeType === 'user'">
           待添加...
         </el-form-item>
-        <el-form-item prop="selfSelect" label="发起人自选择" v-if="node.assigneeType === 'self_select'">
-          <el-radio-group v-model="node.self">
+        <el-form-item prop="selfSelect" label="发起人自选择" v-if="node.assigneeType === 'chooser'">
+          <el-radio-group v-model="node.chooser">
             <el-radio-button :label="false">单选</el-radio-button>
             <el-radio-button :label="true">多选</el-radio-button>
           </el-radio-group>
@@ -58,14 +58,14 @@ const {node} = useVModels($props, $emits)
             <el-option label="十一级上级" :value="11"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item prop="role" label="系统角色" v-if="node.assigneeType === 'role'">
+        <el-form-item prop="roles" label="指定角色" v-if="node.assigneeType === 'role'">
           待添加...
         </el-form-item>
-        <el-form-item prop="assignedUser" label="表单内人员" v-if="node.assigneeType === 'form_user'">
+        <el-form-item prop="formUser" label="表单内人员" v-if="node.assigneeType === 'formUser'">
           待添加...
         </el-form-item>
 
-        <el-form-item prop="handler" label="审批人为空">
+        <el-form-item prop="nobody" label="审批人为空">
           <el-radio-group v-model="node.nobody">
             <el-radio label="pass">自动通过</el-radio>
             <el-radio label="reject">自动驳回</el-radio>
@@ -74,10 +74,10 @@ const {node} = useVModels($props, $emits)
       </el-form>
     </el-tab-pane>
     <el-tab-pane label="表单权限" name="formPermissions">
-      表单权限设置
+      待添加...
     </el-tab-pane>
     <el-tab-pane label="操作权限" name="operationPermissions">
-      操作权限
+      待添加...
     </el-tab-pane>
   </segmented>
 </template>

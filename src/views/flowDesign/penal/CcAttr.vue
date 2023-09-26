@@ -24,7 +24,7 @@ const {node} = useVModels($props, $emits)
       </el-form>
     </el-tab-pane>
     <el-tab-pane label="表单权限" name="formPermissions">
-      表单权限设置
+      待添加...
     </el-tab-pane>
   </segmented>
 </template>

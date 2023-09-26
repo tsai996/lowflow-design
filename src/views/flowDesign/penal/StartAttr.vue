@@ -17,10 +17,10 @@ const {node} = useVModels($props, $emits)
 <template>
   <segmented v-model="activeName" stretch :block="false">
     <el-tab-pane label="表单权限" name="formPermissions">
-      表单权限设置
+      待添加...
     </el-tab-pane>
     <el-tab-pane label="操作权限" name="operationPermissions">
-      操作权限设置
+      待添加...
     </el-tab-pane>
   </segmented>
 </template>
