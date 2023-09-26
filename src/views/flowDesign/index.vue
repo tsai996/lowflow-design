@@ -104,6 +104,7 @@ onUnmounted(() => {
   .node-container {
     margin: 0 auto;
     transform: scale(v-bind(getScale));
+    transform-origin: top left;
     display: flex;
     align-items: center;
     flex-direction: column;
