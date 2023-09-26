@@ -67,6 +67,10 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
+        // 打包分类
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
         // 打包后的文件夹名称生成规则-->解决部分静态服务器无法正常返回_plugin-vue_export-helper文件
         sanitizeFileName(name) {
           const match = /^[a-z]:/i.exec(name)
