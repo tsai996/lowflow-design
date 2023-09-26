@@ -16,7 +16,7 @@ const {node} = useVModels($props, $emits)
 
 <template>
   <segmented v-model="activeName" stretch :block="false">
-    <el-tab-pane label="设置从抄送人" name="properties">
+    <el-tab-pane label="设置抄送人" name="properties">
       <el-form label-position="top" label-width="90px">
         <el-form-item prop="assigneeType" label="抄送人">
           待添加...
