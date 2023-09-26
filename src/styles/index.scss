@@ -1,0 +1,59 @@
+// import dark theme
+@use "element-plus/theme-chalk/src/dark/css-vars.scss" as *;
+
+:root {
+  .el-segmented {
+    --el-segmented-radius: var(--el-border-radius-base);
+    --el-segmented-padding: 3px;
+    --el-segmented-bg: var(--el-fill-color-light);
+    --el-segmented-height: 28px;
+    --el-segmented-font-size: 14px;
+    --el-segmented-item-padding: 12px;
+    --el-segmented-color: var(--el-text-color-secondary);
+    --el-segmented-active-color: var(--el-text-color-primary);
+    --el-segmented-active-bg: var(--el-bg-color-overlay);
+    --el-segmented-active-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
+    --el-segmented-hover-bg: rgba(0, 0, 0, .04);
+    --el-segmented-disabled-color: var(--el-text-color-placeholder);
+  }
+}
+
+// 自定义抽屉样式
+.el-drawer {
+  // 抽屉头部
+  .el-drawer__header {
+    margin-bottom: 0;
+    padding: calc(var(--el-drawer-padding-primary) - 5px) var(--el-drawer-padding-primary) calc(var(--el-drawer-padding-primary) - 6px);
+    border-bottom: 1px var(--el-border-style) var(--el-border-color);
+    justify-content: space-between;
+    // 抽屉标题
+    .el-drawer__title {
+      border-left: 3px solid var(--el-color-primary);
+      padding-left: 5px;
+    }
+  }
+
+  .el-drawer__footer {
+    border-top: var(--el-border);
+    padding: calc(var(--el-drawer-padding-primary) - 5px)
+  }
+}
+
+body {
+  font-family: Inter, system-ui, Avenir, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
+
+a {
+  color: var(--el-color-primary);
+}
+
+code {
+  border-radius: 2px;
+  padding: 2px 4px;
+  background-color: var(--el-color-primary-light-9);
+  color: var(--el-color-primary);
+}
