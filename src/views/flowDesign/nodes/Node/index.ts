@@ -4,5 +4,4 @@ export interface FlowNode {
     name: string;
     type: string;
     child: FlowNode | null;
-    props?: Record<string, any>;
 }
