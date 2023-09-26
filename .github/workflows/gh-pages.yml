@@ -32,7 +32,7 @@ jobs:
         run: pnpm install
       # 打包
       - name: 打包
-        run: pnpm build:test
+        run: pnpm build
       # 部署
       - name: 部署到gh-pages分支
         uses: peaceiris/actions-gh-pages@v3
