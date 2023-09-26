@@ -3,8 +3,8 @@ import AddBut from '../Add/index.vue'
 import {useVModels} from '@vueuse/core'
 import {ClickOutside as vClickOutside, componentSizeMap, ElInput, useFormSize} from 'element-plus'
 import {FlowNode} from './index'
-import {computed, inject, nextTick, ref} from "vue";
-import {List,Stamp,Promotion,EditPen,CircleClose} from "@element-plus/icons-vue";
+import {type Component, computed, inject, nextTick, ref} from "vue";
+import {List, Stamp, Promotion, EditPen, CircleClose, Share} from "@element-plus/icons-vue";
 
 export interface NodeProps {
   icon?: string
@@ -12,6 +12,13 @@ export interface NodeProps {
   color?: string
   readOnly?: boolean
   close?: boolean
+}
+
+const icons: Record<string, Component> = {
+  list: List,
+  stamp: Stamp,
+  share: Share,
+  promotion: Promotion
 }
 
 const $props = withDefaults(defineProps<NodeProps>(), {
@@ -67,11 +74,13 @@ const onClickOutside = () => {
                     v-if="showInput"/>
           <el-text tag="b" truncated v-else @click.stop="onShowInput">
             {{ node.name }}
-            <el-icon><EditPen /></el-icon>
+            <el-icon>
+              <EditPen/>
+            </el-icon>
           </el-text>
           <span v-if="icon">
             <el-icon :size="30" color="node-icon">
-              <component :is="icon"/>
+              <component :is="icons[icon.toLowerCase()]"/>
             </el-icon>
         </span>
         </div>
@@ -101,7 +110,8 @@ const onClickOutside = () => {
 <style scoped lang="scss">
 .node-box {
   position: relative;
-  &:before{
+
+  &:before {
     content: '';
     position: absolute;
     top: 0;
@@ -113,6 +123,7 @@ const onClickOutside = () => {
     height: 100%;
     background-color: var(--el-border-color);
   }
+
   .node {
     border-radius: 7px;
     cursor: pointer;
