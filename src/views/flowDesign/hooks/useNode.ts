@@ -7,10 +7,10 @@ import {CcNode} from '../nodes/Cc/index'
 
 const useNode = (node: FlowNode) => {
     /**
-     * 生成节点id
+     * 生成唯一节点id
      */
     const generateId = (): string => {
-        let id = `node-${Math.random().toString(36).substr(5)}`;
+        let id = `node-${Math.random().toString(36).substring(2, 7)}`
         const findId = (node: FlowNode, id: string): boolean => {
             if (node.id === id) {
                 return true
