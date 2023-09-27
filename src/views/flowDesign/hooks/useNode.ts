@@ -66,6 +66,7 @@ const useNode = (node: FlowNode) => {
             users: [],
             roles: [],
             leader: 1,
+            chooser: false,
             self: false,
             nobody: 'reject'
         } as ApprovalNode
