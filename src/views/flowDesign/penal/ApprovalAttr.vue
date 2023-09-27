@@ -32,8 +32,8 @@ const {node} = useVModels($props, $emits)
         <el-form-item prop="users" label="指定人员" v-if="node.assigneeType === 'user'">
           待添加...
         </el-form-item>
-        <el-form-item prop="selfSelect" label="发起人自选择" v-if="node.assigneeType === 'chooser'">
-          <el-radio-group v-model="node.chooser">
+        <el-form-item prop="selfSelect" label="发起人自选择" v-if="node.assigneeType === 'choice'">
+          <el-radio-group v-model="node.choice">
             <el-radio-button :label="false">单选</el-radio-button>
             <el-radio-button :label="true">多选</el-radio-button>
           </el-radio-group>

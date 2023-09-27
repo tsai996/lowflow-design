@@ -2,7 +2,7 @@ import {FlowNode} from '../Node/index'
 
 export interface ApprovalNode extends FlowNode {
     // 审批方式
-    assigneeType: 'user' | 'role' | 'chooser' | 'self' | 'leader' | 'formUser'
+    assigneeType: 'user' | 'role' | 'choice' | 'self' | 'leader' | 'formUser'
     // 审批人
     users: string[]
     // 审批角色
@@ -10,7 +10,7 @@ export interface ApprovalNode extends FlowNode {
     // 主管
     leader: number
     // 自选：true-多选，false-单选
-    chooser: boolean
+    choice: boolean
     // 发起人自己
     self: boolean
     // 多人审批方式
