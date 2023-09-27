@@ -17,6 +17,11 @@
     --el-segmented-disabled-color: var(--el-text-color-placeholder);
   }
 }
+@media (max-width: 1200px) {
+  .el-drawer.rtl {
+    width: 90% !important;
+  }
+}
 
 // 自定义抽屉样式
 .el-drawer {
