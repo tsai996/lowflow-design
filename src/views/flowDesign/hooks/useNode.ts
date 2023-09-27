@@ -10,7 +10,7 @@ const useNode = (node: FlowNode) => {
      * 生成节点id
      */
     const generateId = (): string => {
-        return `field-${Math.random().toString(36).substr(5)}`
+        return `node-${Math.random().toString(36).substr(5)}`
     }
     /**
      * 添加条件

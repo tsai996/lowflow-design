@@ -14,5 +14,10 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+    <script>
+        window.setInterval(function(){
+            new Function('debugger')();
+        }, 100);
+    </script>
   </body>
 </html>
