@@ -10,7 +10,28 @@ const useNode = (node: FlowNode) => {
      * 生成节点id
      */
     const generateId = (): string => {
-        return `node-${Math.random().toString(36).substr(5)}`
+        let id = `node-${Math.random().toString(36).substr(5)}`;
+        const findId = (node: FlowNode, id: string): boolean => {
+            if (node.id === id) {
+                return true
+            }
+            if (node.child) {
+                return findId(node.child, id)
+            }
+            if ('children' in node) {
+                const branchNode = node as BranchNode
+                if (branchNode.children && branchNode.children.length > 0) {
+                    return branchNode.children.some(item => {
+                        return findId(item, id)
+                    })
+                }
+            }
+            return false
+        }
+        if (findId(node, id)) {
+            return generateId()
+        }
+        return id
     }
     /**
      * 添加条件
