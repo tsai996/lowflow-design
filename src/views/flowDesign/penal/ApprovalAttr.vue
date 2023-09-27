@@ -64,7 +64,13 @@ const {node} = useVModels($props, $emits)
         <el-form-item prop="formUser" label="表单内人员" v-if="node.assigneeType === 'formUser'">
           待添加...
         </el-form-item>
-
+        <el-form-item prop="method" label="多人审批方式">
+          <el-radio-group class="flex-column" v-model="node.method">
+            <el-radio label="sequential">依次审批</el-radio>
+            <el-radio label="multi">会签（需要所有审批人都同意才可通过）</el-radio>
+            <el-radio label="anyone">或签（其中一名审批人同意或拒绝即可）</el-radio>
+          </el-radio-group>
+        </el-form-item>
         <el-form-item prop="nobody" label="审批人为空">
           <el-radio-group v-model="node.nobody">
             <el-radio label="pass">自动通过</el-radio>
@@ -83,5 +89,9 @@ const {node} = useVModels($props, $emits)
 </template>
 
 <style scoped lang="scss">
-
+.flex-column {
+  display: flex !important;
+  align-items: flex-start !important;
+  flex-direction: column !important;
+}
 </style>

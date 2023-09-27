@@ -13,6 +13,8 @@ export interface ApprovalNode extends FlowNode {
     chooser: boolean
     // 发起人自己
     self: boolean
+    // 多人审批方式
+    method: "sequential" | "multi" | "anyone"
     // 审批人为空时处理方式：reject-驳回，admin-管理员，pass-通过
     nobody: 'reject' | 'pass'
 }
