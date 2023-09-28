@@ -200,26 +200,6 @@ defineExpose({
 </template>
 
 <style scoped lang="scss">
-/* 1. 声明过渡效果 */
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
-}
-
-/* 2. 声明进入和离开的状态 */
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: scaleY(0.01) translate(30px, 0);
-}
-
-/* 3. 确保离开的项目被移除出了布局流
-      以便正确地计算移动时的动画效果。 */
-.list-leave-active {
-  position: absolute;
-}
-
 :deep {
   .el-tree {
     --el-tree-node-content-height: 40px;
@@ -239,20 +219,16 @@ defineExpose({
   }
 }
 
-:deep {
-  .el-card {
-    background-color: transparent;
+.el-card {
+  background-color: transparent;
 
-    .el-card__header {
-      padding: 10px;
-    }
-
-    .el-card__body {
-      padding: 0;
-    }
+  :deep(.el-card__header) {
+    padding: 10px !important;
+  }
+  :deep(.el-card__body) {
+    padding: 0 !important;
   }
 }
-
 .org-tree {
   height: 270px;
   padding: 5px;
