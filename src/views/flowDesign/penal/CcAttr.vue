@@ -18,8 +18,8 @@ const {node} = useVModels($props, $emits)
   <segmented v-model="activeName" stretch :block="false">
     <el-tab-pane label="设置抄送人" name="properties">
       <el-form label-position="top" label-width="90px">
-        <el-form-item prop="assigneeType" label="抄送人">
-          待添加...
+        <el-form-item prop="users" label="抄送人">
+          <user-selection multiple placeholder="请选择人员" v-model="node.users"/>
         </el-form-item>
       </el-form>
     </el-tab-pane>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {CcNode} from './index'
 import {ref, watchEffect} from "vue";
+import {getList, User} from "~/api/modules/user";
 
 export interface CcContentProps {
   node: CcNode
@@ -11,7 +12,11 @@ const content = ref<string>('')
 watchEffect(() => {
   const props = $props.node
   if (props.users.length > 0) {
-    // 可以从异步后端查询出用户名,显示在content中
+    getList(props.users).then(res => {
+      if(res.success){
+        content.value = res.data.map((item: User) => item.name).join('、')
+      }
+    })
   } else {
     content.value = '未指定人员'
   }
