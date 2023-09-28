@@ -22,7 +22,7 @@ const {node} = useVModels($props, $emits)
           <el-radio-group v-model="node.assigneeType">
             <el-radio label="user">指定人员</el-radio>
             <el-radio label="role">指定角色</el-radio>
-            <el-radio label="self_select">发起人自选</el-radio>
+            <el-radio label="choice">发起人自选</el-radio>
             <el-radio label="self">发起人自己</el-radio>
             <el-radio label="leader">多级上级</el-radio>
             <el-radio label="formUser">表单内人员</el-radio>
@@ -64,7 +64,7 @@ const {node} = useVModels($props, $emits)
         <el-form-item prop="formUser" label="表单内人员" v-if="node.assigneeType === 'formUser'">
           待添加...
         </el-form-item>
-        <el-form-item prop="formRole" label="表单内人员" v-if="node.assigneeType === 'formRole'">
+        <el-form-item prop="formRole" label="表单内角色" v-if="node.assigneeType === 'formRole'">
           待添加...
         </el-form-item>
         <el-form-item prop="method" label="多人审批方式">
