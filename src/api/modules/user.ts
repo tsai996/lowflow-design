@@ -12,7 +12,7 @@ export interface User {
  * @param username
  */
 export const getByUsername = (username: string) => {
-    return http.get<User>(`/user/info/${username}`)
+    return http.get<User>(`/user/info`,{username:username})
 }
 
 /**

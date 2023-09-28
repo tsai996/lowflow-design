@@ -47,7 +47,6 @@ const handleZoom = (e: WheelEvent) => {
   }
 }
 const convert = () => {
-  console.log(nodeTreeObj)
   const process = {
     id: 'dawdawdw',
     name: '测试流程',

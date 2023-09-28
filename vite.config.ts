@@ -20,7 +20,7 @@ const pathSrc = path.resolve(__dirname, 'src')
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: 'lowflow-design',
+    base: '/lowflow-design',
     resolve: {
         alias: {
             '~/': `${pathSrc}/`,
@@ -38,7 +38,8 @@ export default defineConfig({
         viteMockServe({
             mockPath: './mock',
             localEnabled: true,
-            prodEnabled: true
+            prodEnabled: true,
+            injectCode: ` import { setupProdMockServer } from './mockProdServer'; setupProdMockServer(); `,
         }),
         VueSetupExtend(),
         Components({
@@ -81,6 +82,12 @@ export default defineConfig({
                 chunkFileNames: 'assets/js/[name]-[hash].js',
                 entryFileNames: 'assets/js/[name]-[hash].js',
                 assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
+                // 分包策略
+                manualChunks(id: string) {
+                    if (id.includes('node_modules')) {
+                        return id.split('/node_modules/').pop()?.split('/')[0]
+                    }
+                },
                 // 打包后的文件夹名称生成规则-->解决部分静态服务器无法正常返回_plugin-vue_export-helper文件
                 sanitizeFileName(name) {
                     const match = /^[a-z]:/i.exec(name)

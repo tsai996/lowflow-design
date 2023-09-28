@@ -79,8 +79,8 @@ class RequestHttp {
      * @param url 请求地址
      * @param params 请求参数
      */
-    get<T>(url: string, params?: object): Promise<ResultData<T>> {
-        return this.service.get(url, params)
+    get<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
+        return this.service.get(url, {params, ..._object})
     }
 
     /**

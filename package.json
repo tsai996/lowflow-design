@@ -5,7 +5,7 @@
   "scripts": {
     "mock": "vite --mode mock --force",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --mode development",
     "generate": "vite-ssg build",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit"

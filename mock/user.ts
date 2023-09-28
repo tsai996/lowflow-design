@@ -54,10 +54,10 @@ const userList = [
 
 const user = [
     {
-        url: "/api/user/info/:username",
+        url: "/api/user/info",
         method: "get",
         response: (req) => {
-            const username = req.url.username || req.body.username || req.query.username;
+            const username = req.query.username;
             return {
                 code: 200,
                 success: true,
