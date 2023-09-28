@@ -3,8 +3,9 @@ import NodeTree from './nodes/index.vue'
 import NodePenal from './penal/index.vue'
 import {FlowNode} from './nodes/Node/index'
 import useNode from './hooks/useNode'
-import {computed, onUnmounted, provide, reactive, ref} from "vue";
-import {Plus,Minus} from "@element-plus/icons-vue";
+import {computed, onMounted, onUnmounted, provide, reactive, ref} from "vue";
+import {Plus, Minus} from "@element-plus/icons-vue";
+import {getList} from "~/api/modules/user";
 
 const nodePenalRef = ref<InstanceType<typeof NodePenal>>()
 const nodeTreeObj = reactive<FlowNode>({
@@ -71,9 +72,8 @@ onUnmounted(() => {
     </div>
     <!--流程树-->
     <div class="node-container">
-      <NodeTree :node="nodeTreeObj" />
+      <NodeTree :node="nodeTreeObj"/>
     </div>
-
     <!--属性面板-->
     <NodePenal ref="nodePenalRef"/>
   </div>

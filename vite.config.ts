@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
+import {viteMockServe} from "vite-plugin-mock"
 
 import Unocss from 'unocss/vite'
 import {
@@ -34,6 +35,10 @@ export default defineConfig({
     },
     plugins: [
         vue(),
+        viteMockServe({
+            mockPath: './mock',
+            enable: true
+        }),
         VueSetupExtend(),
         Components({
             // allow auto load markdown components under `./src/components/`

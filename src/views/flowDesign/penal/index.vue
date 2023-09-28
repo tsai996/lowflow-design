@@ -12,7 +12,13 @@ const nodeProps: Record<string, Component> = {
   cc: CcAttr
 }
 
-let flowNode = ref<FlowNode | undefined>()
+let flowNode = ref<FlowNode>({
+  id: '',
+  pid: '',
+  type: '',
+  name: '',
+  child: null
+})
 const visible = ref(false)
 const showInput = ref(false)
 const onClickOutside = () => {
@@ -30,7 +36,7 @@ defineExpose({
 </script>
 
 <template>
-  <el-drawer v-model="visible" v-if="visible" size="35%">
+  <el-drawer v-model="visible" size="35%">
     <template #header="{ titleId, titleClass }">
       <span :id="titleId" :class="titleClass">
           <el-input v-click-outside="onClickOutside" @blur="onClickOutside" maxlength="30" v-model="flowNode!.name"
