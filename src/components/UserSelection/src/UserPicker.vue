@@ -2,9 +2,10 @@
 import {useVModel} from '@vueuse/core'
 import {TreeNodeData} from 'element-plus/es/components/tree/src/tree.type'
 import {type ElTree} from 'element-plus'
-import {reactive, ref} from "vue";
+import {reactive, ref, watch} from "vue";
 import {getList} from "~/api/modules/user";
 import {School, Check} from "@element-plus/icons-vue";
+import Node from "element-plus/es/components/tree/src/model/node";
 
 export type ModelValueType = string | string[] | null | undefined
 
@@ -75,6 +76,14 @@ const dialogVisible = ref(false)
 const queryForm = reactive({
   name: null,
 })
+
+watch(() => queryForm.name, (val) => {
+  orgTreeRef.value?.filter(val)
+})
+const filterNode = (value: string, data: TreeNodeData): boolean => {
+  if (!value) return true
+  return data.name.includes(value)
+}
 const open = () => {
   dialogVisible.value = true
 }
@@ -162,6 +171,7 @@ defineExpose({
             :data="userOrgOptions"
             :default-expanded-keys="expandedKeys"
             :props="treeProps"
+            :filter-node-method="filterNode"
             @node-click="onNodeClick">
           <template #default="{data}">
             <div class="flex flex-1 flex-items-center flex-justify-between">
