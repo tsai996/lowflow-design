@@ -38,7 +38,7 @@ export default defineConfig({
         viteMockServe({
             mockPath: './mock',
             localEnabled: true,
-            prodEnabled: false
+            prodEnabled: true
         }),
         VueSetupExtend(),
         Components({
