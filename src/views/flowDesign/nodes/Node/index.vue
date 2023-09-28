@@ -66,12 +66,13 @@ const onClickOutside = () => {
     <el-card shadow="always" @click="onOpenPenal()" class="node">
       <template #header>
         <div class="head">
-          <el-input ref="inputRef"
-                    v-click-outside="onClickOutside"
-                    @blur="onClickOutside"
-                    maxlength="30"
-                    v-model="node.name"
-                    v-if="showInput"/>
+          <div @click.stop v-if="showInput">
+            <el-input ref="inputRef"
+                      v-click-outside="onClickOutside"
+                      @blur="onClickOutside"
+                      maxlength="30"
+                      v-model="node.name"/>
+          </div>
           <el-text tag="b" truncated v-else @click.stop="onShowInput">
             {{ node.name }}
             <el-icon>
@@ -85,22 +86,22 @@ const onClickOutside = () => {
         </span>
         </div>
       </template>
-      <span @click.stop>
-              <el-popconfirm title="您确定要删除该节点吗？"
-                             width="200"
-                             :hide-after="0"
-                             placement="right-start"
-                             @confirm="delNode(node)">
-        <template #reference>
-          <el-button class='node-close'
-                     v-show="close && !readOnly"
-                     plain circle
-                     :icon="CircleClose"
-                     size="small"
-                     type="danger"/>
-        </template>
-      </el-popconfirm>
-      </span>
+      <div @click.stop>
+        <el-popconfirm title="您确定要删除该节点吗？"
+                       width="200"
+                       :hide-after="0"
+                       placement="right-start"
+                       @confirm="delNode(node)">
+          <template #reference>
+            <el-button class='node-close'
+                       v-show="close && !readOnly"
+                       plain circle
+                       :icon="CircleClose"
+                       size="small"
+                       type="danger"/>
+          </template>
+        </el-popconfirm>
+      </div>
       <slot></slot>
     </el-card>
     <add-but @add-node="(type:string)=>addNode(type,node)"/>
