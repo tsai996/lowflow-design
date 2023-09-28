@@ -36,8 +36,7 @@ export default defineConfig({
     plugins: [
         vue(),
         viteMockServe({
-            mockPath: './mock',
-            enable: true
+            mockPath: './mock'
         }),
         VueSetupExtend(),
         Components({
@@ -63,6 +62,9 @@ export default defineConfig({
                     scale: 1.2,
                     warn: true,
                 }),
+            ],
+            rules: [
+                ['flex-center', {display: 'flex', 'align-items': 'center', 'justify-content': 'center'}]
             ],
             transformers: [
                 transformerDirectives(),

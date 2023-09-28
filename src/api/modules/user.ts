@@ -18,6 +18,7 @@ export const getByUsername = (username: string) => {
 /**
  * 查询用户列表
  */
-export const getList = () => {
-    return http.get<User[]>('/user/list')
+export const getList = (userIds?: string[]) => {
+    const params = userIds ? {userIds: userIds} : {}
+    return http.post<User[]>('/user/list', params)
 }
