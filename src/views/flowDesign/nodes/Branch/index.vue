@@ -60,7 +60,8 @@ const {addNode} = inject<{
     flex-direction: column;
     align-items: center;
     background-color: var(--el-bg-color);
-    &:before{
+
+    &:before {
       content: '';
       position: absolute;
       top: 0;

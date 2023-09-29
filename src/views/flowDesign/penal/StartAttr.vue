@@ -3,10 +3,13 @@ import Segmented from '~/components/Segmented'
 import {useVModels} from '@vueuse/core'
 import {StartNode} from '../nodes/Start/index'
 import {ref} from "vue";
+
 const activeName = ref('formPermissions')
+
 export interface ApprovalAttr {
   node: StartNode
 }
+
 const $props = defineProps<ApprovalAttr>()
 const $emits = defineEmits<{
   (e: 'update:node', modelValue: StartNode): void

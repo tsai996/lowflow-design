@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
+
   .end-node {
     display: flex;
     align-items: center;
@@ -27,6 +28,7 @@
     font-size: 17px;
     box-shadow: var(--el-box-shadow-light);
     background-color: var(--el-color-primary);
+
     &:hover {
       box-shadow: 0 0 5px 0 var(--el-color-primary);
     }

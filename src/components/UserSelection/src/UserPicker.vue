@@ -225,10 +225,12 @@ defineExpose({
   :deep(.el-card__header) {
     padding: 10px !important;
   }
+
   :deep(.el-card__body) {
     padding: 0 !important;
   }
 }
+
 .org-tree {
   height: 270px;
   padding: 5px;

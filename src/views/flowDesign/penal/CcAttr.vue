@@ -3,10 +3,13 @@ import Segmented from '~/components/Segmented'
 import {useVModels} from '@vueuse/core'
 import {CcNode} from '../nodes/Cc/index'
 import {ref} from "vue";
+
 const activeName = ref('properties')
+
 export interface ApprovalAttr {
   node: CcNode
 }
+
 const $props = defineProps<ApprovalAttr>()
 const $emits = defineEmits<{
   (e: 'update:node', modelValue: CcNode): void

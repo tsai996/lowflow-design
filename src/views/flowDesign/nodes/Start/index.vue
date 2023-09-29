@@ -14,7 +14,7 @@ withDefaults(defineProps<StartProps>(), {})
   <div class="start-box">
     <Node icon="List"
           :close="false"
-          color="linear-gradient(89.96deg, #7B68EE .05%, #7B68EE 79.83%)"
+          color="#8c7cf3"
           :node="node">
       <Content :node="node"/>
     </Node>

@@ -50,7 +50,9 @@ const onClose = (username: string) => {
   <user-picker ref="userPickerRef" :multiple="multiple" v-model="value"/>
   <div class="user-wrapper">
     <el-button class="user-but-item" :size="formSize" :disabled="disabled" @click="openUserPicker" circle>
-      <el-icon><User /></el-icon>
+      <el-icon>
+        <User/>
+      </el-icon>
     </el-button>
     <user-tag v-for="item in valueArr" :closable="!disabled" :key="item" :username="item" @close="onClose"/>
     <el-text v-show="!value || value.length===0" class="placeholder">

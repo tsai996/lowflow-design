@@ -13,7 +13,7 @@ withDefaults(defineProps<ApprovalProps>(), {})
 <template>
   <Node icon="Promotion"
         v-bind="$attrs"
-        color="rgb(50, 150, 250)"
+        color="#3296FA"
         :node="node">
     <Content :node="node"/>
   </Node>

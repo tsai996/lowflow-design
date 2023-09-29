@@ -12,7 +12,7 @@ const content = ref<string>('')
 watchEffect(() => {
   const props = $props.node
   if (props.assigneeType === 'choice') {
-    content.value = `发起人自选（${props.choice?'单选':'多选'}）`
+    content.value = `发起人自选（${props.choice?'多选':'单选'}）`
   } else if (props.assigneeType === 'self') {
     content.value = '发起人自己'
   } else if (props.assigneeType === 'leader') {

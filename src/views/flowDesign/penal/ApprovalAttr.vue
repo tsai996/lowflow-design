@@ -3,10 +3,13 @@ import Segmented from '~/components/Segmented'
 import {useVModels} from '@vueuse/core'
 import {ApprovalNode} from '../nodes/Approval/index'
 import {ref} from "vue";
+
 const activeName = ref('properties')
+
 export interface ApprovalAttr {
   node: ApprovalNode
 }
+
 const $props = defineProps<ApprovalAttr>()
 const $emits = defineEmits<{
   (e: 'update:node', modelValue: ApprovalNode): void
@@ -68,10 +71,10 @@ const {node} = useVModels($props, $emits)
           待添加...
         </el-form-item>
         <el-form-item prop="method" label="多人审批方式">
-          <el-radio-group class="flex-column" v-model="node.method">
+          <el-radio-group class="flex-column" v-model="node.multi">
             <el-radio label="sequential">依次审批</el-radio>
-            <el-radio label="multi">会签（需要所有审批人都同意才可通过）</el-radio>
-            <el-radio label="anyone">或签（其中一名审批人同意或拒绝即可）</el-radio>
+            <el-radio label="joint">会签（需要所有审批人都通过才可通过）</el-radio>
+            <el-radio label="single">或签（其中一名审批人通过或驳回即可）</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item prop="nobody" label="审批人为空">
