@@ -21,6 +21,12 @@
   .el-drawer.rtl {
     width: 90% !important;
   }
+  .el-dialog {
+    width: 90% !important;
+  }
+  .el-dialog.is-fullscreen {
+    width: 100% !important;
+  }
 }
 
 // 自定义抽屉样式
