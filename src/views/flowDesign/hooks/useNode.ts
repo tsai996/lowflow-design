@@ -1,7 +1,7 @@
 import {FlowNode} from '../nodes/Node/index'
 import {ExclusiveNode} from '../nodes/Exclusive/index'
 import {BranchNode} from '../nodes/Branch/index'
-import {ConditionNode} from '../nodes/Condition/index'
+import {ConditionNode, FilterRules} from '../nodes/Condition/index'
 import {ApprovalNode} from '../nodes/Approval/index'
 import {CcNode} from '../nodes/Cc/index'
 
@@ -45,6 +45,15 @@ const useNode = (node: FlowNode) => {
             type: 'condition',
             def: false,
             name: `条件${exclusive.children.length + 1}`,
+            conditions: {
+                logicalOperator: 'and',
+                conditions: [{
+                    field: null,
+                    operator: '',
+                    value: null
+                }],
+                groups: []
+            } as FilterRules,
             child: null
         } as ConditionNode)
     }
