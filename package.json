@@ -19,6 +19,7 @@
     "@iconify-json/ep": "^1.1.12",
     "@types/node": "^20.6.0",
     "@vitejs/plugin-vue": "^4.3.4",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
     "mockjs": "^1.1.0",
     "sass": "^1.66.1",
     "typescript": "^5.2.2",

@@ -47,11 +47,7 @@ const useNode = (node: FlowNode) => {
             name: `条件${exclusive.children.length + 1}`,
             conditions: {
                 logicalOperator: 'and',
-                conditions: [{
-                    field: null,
-                    operator: '',
-                    value: null
-                }],
+                conditions: [],
                 groups: []
             } as FilterRules,
             child: null
