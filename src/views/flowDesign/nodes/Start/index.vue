@@ -13,6 +13,7 @@ withDefaults(defineProps<StartProps>(), {})
 <template>
   <div class="start-box">
     <Node icon="List"
+          :arrow="false"
           :close="false"
           color="#8c7cf3"
           :node="node">

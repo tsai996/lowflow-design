@@ -3,6 +3,7 @@ import Segmented from '~/components/Segmented'
 import {useVModels} from '@vueuse/core'
 import {ApprovalNode} from '../nodes/Approval/index'
 import {ref} from "vue";
+import {CircleCheck, CircleClose,Switch,Plus,Minus} from "@element-plus/icons-vue";
 
 const activeName = ref('properties')
 
@@ -89,7 +90,106 @@ const {node} = useVModels($props, $emits)
       待添加...
     </el-tab-pane>
     <el-tab-pane label="操作权限" name="operationPermissions">
-      待添加...
+      <div class="flow-opt-item">
+        <el-icon :size="32" class="flow-opt-item__icon">
+          <CircleCheck/>
+        </el-icon>
+        <div class="flow-opt-item__content">
+          <el-text tag="b">
+            同意
+          </el-text>
+          <div class="flow-opt-item__second">
+            同意描述、同意描述、同意描述、同意描述、同意描述、同意描述
+          </div>
+        </div>
+        <el-switch
+            v-model="node.operations.complete"
+            inline-prompt
+            active-text="开"
+            inactive-text="关"
+        />
+      </div>
+      <el-divider/>
+      <div class="flow-opt-item">
+        <el-icon :size="32" class="flow-opt-item__icon">
+          <CircleClose/>
+        </el-icon>
+        <div class="flow-opt-item__content">
+          <el-text tag="b">
+            拒绝
+          </el-text>
+          <div class="flow-opt-item__second">
+            拒绝描述、拒绝描述、拒绝描述、拒绝描述、拒绝描述、拒绝描述
+          </div>
+        </div>
+        <el-switch
+            v-model="node.operations.refuse"
+            inline-prompt
+            active-text="开"
+            inactive-text="关"
+        />
+      </div>
+      <el-divider/>
+      <div class="flow-opt-item">
+        <el-icon :size="32" class="flow-opt-item__icon">
+          <Switch/>
+        </el-icon>
+        <div class="flow-opt-item__content">
+          <el-text tag="b">
+            转办
+          </el-text>
+          <div class="flow-opt-item__second">
+            转办描述、转办描述、转办描述、转办描述、转办描述、转办描述
+          </div>
+        </div>
+        <el-switch
+            v-model="node.operations.transfer"
+            inline-prompt
+            active-text="开"
+            inactive-text="关"
+        />
+      </div>
+      <el-divider/>
+      <div class="flow-opt-item">
+        <el-icon :size="32" class="flow-opt-item__icon">
+          <Plus/>
+        </el-icon>
+        <div class="flow-opt-item__content">
+          <el-text tag="b">
+            加签
+          </el-text>
+          <div class="flow-opt-item__second">
+            加签描述、加签描述、加签描述、加签描述、加签描述、加签描述
+          </div>
+        </div>
+        <el-switch
+            v-model="node.operations.addMulti"
+            inline-prompt
+            active-text="开"
+            inactive-text="关"
+        />
+      </div>
+      <el-divider/>
+      <div class="flow-opt-item">
+        <el-icon :size="32" class="flow-opt-item__icon">
+          <Minus/>
+        </el-icon>
+        <div class="flow-opt-item__content">
+          <el-text tag="b">
+            减签
+          </el-text>
+          <div class="flow-opt-item__second">
+            减签描述、减签描述、减签描述、减签描述、减签描述、减签描述
+          </div>
+        </div>
+        <el-switch
+            v-model="node.operations.minusMulti"
+            inline-prompt
+            active-text="开"
+            inactive-text="关"
+        />
+      </div>
+      <el-divider/>
     </el-tab-pane>
   </segmented>
 </template>
@@ -99,5 +199,29 @@ const {node} = useVModels($props, $emits)
   display: flex !important;
   align-items: flex-start !important;
   flex-direction: column !important;
+}
+.flow-opt-item {
+  display: flex;
+  align-items: center;
+
+  .flow-opt-item__icon {
+    background: var(--el-color-primary);
+    color: #fff;
+    border-radius: 7px;
+    padding: 3px;
+  }
+
+  .flow-opt-item__content {
+    box-sizing: border-box;
+    flex: 1;
+    margin-left: 20px;
+    font-size: 14px;
+
+    .flow-opt-item__second {
+      margin-top: 3px;
+      font-size: 12px;
+      color: var(--el-text-color-placeholder);
+    }
+  }
 }
 </style>

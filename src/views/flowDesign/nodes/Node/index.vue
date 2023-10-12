@@ -12,6 +12,7 @@ export interface NodeProps {
   color?: string
   readOnly?: boolean
   close?: boolean
+  arrow?: boolean
 }
 
 const icons: Record<string, Component> = {
@@ -23,7 +24,8 @@ const icons: Record<string, Component> = {
 
 const $props = withDefaults(defineProps<NodeProps>(), {
   readOnly: false,
-  close: true
+  close: true,
+  arrow: true
 })
 const $emits = defineEmits<{
   (e: 'update:node', title: string): void
@@ -167,6 +169,20 @@ const onClickOutside = () => {
         }
       }
     }
+  }
+  .arrow{
+   /* &:before{
+      content: '';
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      border-style: solid;
+      border-width: 8px 6px 0;
+      border-color: var(--el-border-color) transparent transparent;
+      background-color: var(--el-bg-color);
+    }*/
   }
 }
 </style>

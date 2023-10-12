@@ -69,7 +69,14 @@ const useNode = (node: FlowNode) => {
             multi: 'sequential',
             choice: false,
             self: false,
-            nobody: 'reject'
+            nobody: 'reject',
+            operations: {
+                complete: true,
+                refuse: true,
+                transfer: false,
+                addMulti: false,
+                minusMulti: false
+            }
         } as ApprovalNode
         if (child) {
             child.pid = id
