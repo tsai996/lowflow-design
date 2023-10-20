@@ -12,13 +12,15 @@ const content = ref<string>('')
 watchEffect(() => {
   const props = $props.node
   if (props.assigneeType === 'choice') {
-    content.value = `发起人自选（${props.choice?'多选':'单选'}）`
+    content.value = `发起人自选（${props.choice ? '多选' : '单选'}）`
   } else if (props.assigneeType === 'self') {
     content.value = '发起人自己'
   } else if (props.assigneeType === 'leader') {
     content.value = props.leader === 1 ? '直属上级' : `${props.leader}级上级`
   } else if (props.assigneeType === 'formUser') {
     content.value = '表单内人员'
+  } else if (props.assigneeType === 'formRole') {
+    content.value = '表单内角色'
   } else if (props.assigneeType === 'user') {
     if (props.users.length > 0) {
       getList(props.users).then(res => {
