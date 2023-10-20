@@ -15,6 +15,10 @@ const errorInfo = ref({
   message: ''
 })
 const validate = (): ErrorInfo | undefined => {
+  errorInfo.value = {
+    showError: false,
+    message: ''
+  }
   if ($props.node.assigneeType === 'user') {
     if ($props.node.users.length === 0) {
       errorInfo.value = {
