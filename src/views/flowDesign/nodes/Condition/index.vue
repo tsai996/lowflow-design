@@ -18,6 +18,10 @@ const errorInfo = ref<ErrorInfo>({
  * 验证节点
  */
 const validate = (): ErrorInfo | undefined => {
+  errorInfo.value = {
+    showError: false,
+    message: ''
+  }
   if ($props.node.def) {
     return undefined
   } else if ($props.node.conditions.conditions.length === 0 && $props.node.conditions.groups.length === 0) {

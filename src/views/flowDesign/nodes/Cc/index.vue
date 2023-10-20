@@ -18,6 +18,10 @@ const errorInfo = ref<ErrorInfo>({
  * 验证节点
  */
 const validate = (): ErrorInfo | undefined => {
+  errorInfo.value = {
+    showError: false,
+    message: ''
+  }
   if ($props.node.users.length === 0) {
     errorInfo.value = {showError: true, message: `节点：[ ${$props.node.name} ] 未指定抄送人`}
   }
