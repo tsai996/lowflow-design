@@ -47,8 +47,8 @@ const {node} = useVModels($props, $emits)
             发起人自己作为审批人进行审批
           </el-text>
         </el-form-item>
-        <el-form-item prop="leader" label="直属上级" v-if="node.assigneeType === 'leader'">
-          <el-select v-model="node.leader" placeholder="请选择直属上级">
+        <el-form-item prop="leader" label="多级上级" v-if="node.assigneeType === 'leader'">
+          <el-select v-model="node.leader" placeholder="请选择多级上级">
             <el-option label="直属上级" :value="1"></el-option>
             <el-option label="二级上级" :value="2"></el-option>
             <el-option label="三级上级" :value="3"></el-option>

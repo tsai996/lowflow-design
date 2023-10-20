@@ -5,3 +5,8 @@ export interface FlowNode {
     type: string;
     child: FlowNode | null;
 }
+
+export interface ErrorInfo {
+    showError: boolean,
+    message: string
+}

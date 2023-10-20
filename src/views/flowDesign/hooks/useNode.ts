@@ -1,11 +1,44 @@
-import {FlowNode} from '../nodes/Node/index'
+import {ErrorInfo, FlowNode} from '../nodes/Node/index'
 import {ExclusiveNode} from '../nodes/Exclusive/index'
 import {BranchNode} from '../nodes/Branch/index'
 import {ConditionNode, FilterRules} from '../nodes/Condition/index'
 import {ApprovalNode} from '../nodes/Approval/index'
 import {CcNode} from '../nodes/Cc/index'
+import {ref, Ref} from "vue";
 
-const useNode = (node: FlowNode) => {
+const useNode = (node: Ref<FlowNode>) => {
+    /**
+     * 节点错误信息
+     */
+    const nodeErrors = ref(new Map<string, string>())
+    /**
+     * 每个节点的ref
+     */
+    const nodeRefs = ref(new Map<string, any>())
+    /**
+     * 校验所有节点
+     */
+    const validateNodes = () => {
+        nodeErrors.value.clear()
+        nodeRefs.value.forEach((ref, id) => {
+            const validate = ref?.validate
+            if (validate) {
+                const error: ErrorInfo | undefined = validate()
+                if (error && error.showError) {
+                    nodeErrors.value.set(id, error.message)
+                }
+            }
+        })
+        return nodeErrors
+    }
+    /**
+     * 添加节点ref
+     * @param id
+     * @param ref
+     */
+    const addNodeRef = (id: string, ref: any) => {
+        nodeRefs.value.set(id, ref)
+    }
     /**
      * 生成唯一节点id
      */
@@ -28,7 +61,7 @@ const useNode = (node: FlowNode) => {
             }
             return false
         }
-        if (findId(node, id)) {
+        if (findId(node.value, id)) {
             return generateId()
         }
         return id
@@ -68,13 +101,15 @@ const useNode = (node: FlowNode) => {
             child: child,
             // 属性
             assigneeType: 'user',
+            formUser: '',
+            formRole: '',
             users: [],
             roles: [],
             leader: 1,
             multi: 'sequential',
             choice: false,
             self: false,
-            nobody: 'reject',
+            nobody: 'pass',
             operations: {
                 complete: true,
                 refuse: true,
@@ -149,7 +184,7 @@ const useNode = (node: FlowNode) => {
     }
 
     const delNode = (del: FlowNode) => {
-        delNodeNext(node, del)
+        delNodeNext(node.value, del)
     }
     const delNodeNext = (next: FlowNode, del: FlowNode) => {
         if (next.id === del.pid) {
@@ -187,7 +222,10 @@ const useNode = (node: FlowNode) => {
 
     return {
         addNode,
-        delNode
+        delNode,
+        addNodeRef,
+        validateNodes,
+        nodeErrors
     }
 }
 

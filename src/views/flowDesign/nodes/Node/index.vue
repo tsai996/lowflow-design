@@ -2,9 +2,9 @@
 import AddBut from '../Add/index.vue'
 import {useVModels} from '@vueuse/core'
 import {ClickOutside as vClickOutside, componentSizeMap, ElInput, useFormSize} from 'element-plus'
-import {FlowNode} from './index'
+import {FlowNode, ErrorInfo} from './index'
 import {type Component, computed, inject, nextTick, ref} from "vue";
-import {List, Stamp, Promotion, EditPen, CircleClose, Share} from "@element-plus/icons-vue";
+import {List, Stamp, Promotion, EditPen, CircleClose, Share, WarnTriangleFilled} from "@element-plus/icons-vue";
 
 export interface NodeProps {
   icon?: string
@@ -13,6 +13,7 @@ export interface NodeProps {
   readOnly?: boolean
   close?: boolean
   arrow?: boolean
+  errorInfo?: ErrorInfo
 }
 
 const icons: Record<string, Component> = {
@@ -25,7 +26,11 @@ const icons: Record<string, Component> = {
 const $props = withDefaults(defineProps<NodeProps>(), {
   readOnly: false,
   close: true,
-  arrow: true
+  arrow: true,
+  errorInfo: () => ({
+    showError: false,
+    message: ''
+  })
 })
 const $emits = defineEmits<{
   (e: 'update:node', title: string): void
@@ -65,7 +70,15 @@ const onClickOutside = () => {
 
 <template>
   <div class="node-box">
-    <el-card shadow="always" @click="onOpenPenal()" class="node">
+    <el-card shadow="always" @click="onOpenPenal()" :class="['node',{'error-node':$props.errorInfo.showError}]">
+      <el-tooltip placement="top-start">
+        <template #content>
+          {{ $props.errorInfo.message }}
+        </template>
+        <el-icon class="warn-icon" :size="20" v-show="$props.errorInfo.showError">
+          <WarnTriangleFilled @click.stop/>
+        </el-icon>
+      </el-tooltip>
       <template #header>
         <div class="head">
           <div @click.stop v-if="showInput">
@@ -127,6 +140,20 @@ const onClickOutside = () => {
     background-color: var(--el-border-color);
   }
 
+  .warn-icon {
+    cursor: pointer;
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    color: var(--el-color-error);
+  }
+
+  .error-node {
+    box-shadow: 0 0 5px 0 var(--el-color-error-light-3);
+  }
+
   .node {
     border-radius: 7px;
     cursor: pointer;
@@ -143,7 +170,9 @@ const onClickOutside = () => {
     }
 
     &:hover {
-      box-shadow: 0 0 5px 0 var(--el-color-primary);
+      &:not(.error-node) {
+        box-shadow: 0 0 5px 0 var(--el-color-primary);
+      }
 
       .node-close {
         display: block;
@@ -170,19 +199,20 @@ const onClickOutside = () => {
       }
     }
   }
-  .arrow{
-   /* &:before{
-      content: '';
-      position: absolute;
-      top: -13px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      border-style: solid;
-      border-width: 8px 6px 0;
-      border-color: var(--el-border-color) transparent transparent;
-      background-color: var(--el-bg-color);
-    }*/
+
+  .arrow {
+    /* &:before{
+       content: '';
+       position: absolute;
+       top: -13px;
+       left: 50%;
+       transform: translateX(-50%);
+       width: 0;
+       border-style: solid;
+       border-width: 8px 6px 0;
+       border-color: var(--el-border-color) transparent transparent;
+       background-color: var(--el-bg-color);
+     }*/
   }
 }
 </style>

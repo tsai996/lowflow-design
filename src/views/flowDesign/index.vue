@@ -6,31 +6,28 @@ import useNode from './hooks/useNode'
 import {computed, onMounted, onUnmounted, provide, reactive, ref} from "vue";
 import {Plus, Minus} from "@element-plus/icons-vue";
 import {getList} from "~/api/modules/user";
+import {useVModels} from "@vueuse/core";
+
+export interface FlowDesignProps {
+  process: FlowNode,
+  // fields: Field[]
+}
+const $props = defineProps<FlowDesignProps>()
+const $emits = defineEmits(['update:process'])
+const {process} = useVModels($props, $emits)
 
 const nodePenalRef = ref<InstanceType<typeof NodePenal>>()
-const nodeTreeObj = reactive<FlowNode>({
-  id: 'root',
-  pid: null,
-  type: 'start',
-  name: '发起人',
-  child: {
-    id: 'end',
-    pid: 'root',
-    type: 'end',
-    name: '结束',
-    child: null
-  }
-})
 const zoom = ref(100)
 const getScale = computed(() => zoom.value / 100)
 const openPenal = (node: FlowNode) => {
   nodePenalRef.value?.open(node)
 }
-const {addNode, delNode} = useNode(nodeTreeObj)
+const {addNode, delNode, validateNodes,addNodeRef} = useNode(process)
 provide('nodeHooks', {
   readOnly: false,
   addNode,
   delNode,
+  addNodeRef,
   openPenal
 })
 const handleZoom = (e: WheelEvent) => {
@@ -46,12 +43,8 @@ const handleZoom = (e: WheelEvent) => {
     }
   }
 }
-const convert = () => {
-  const process = {
-    id: 'dawdawdw',
-    name: '测试流程',
-    process: nodeTreeObj
-  }
+const validate = () => {
+  validateNodes()
 }
 // 按住shift键滚动鼠标滚轮，可以放大/缩小
 window.addEventListener('wheel', handleZoom)
@@ -68,10 +61,11 @@ onUnmounted(() => {
       <el-button :icon="Plus" @click="zoom += 10" :disabled="zoom >= 170" circle></el-button>
       <span>{{ zoom }}%</span>
       <el-button :icon="Minus" @click="zoom -= 10" circle :disabled="zoom <= 50"></el-button>
+      <el-button @click="validate">校验</el-button>
     </div>
     <!--流程树-->
     <div class="node-container">
-      <NodeTree :node="nodeTreeObj"/>
+      <NodeTree :node="process"/>
     </div>
     <!--属性面板-->
     <NodePenal ref="nodePenalRef"/>

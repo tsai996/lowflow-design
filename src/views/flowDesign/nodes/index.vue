@@ -5,7 +5,7 @@ import CcNode from './Cc/index.vue'
 import ConditionNode from './Condition/index.vue'
 import ExclusiveNode from './Exclusive/index.vue'
 import EndNode from './End/index.vue'
-import {type Component} from 'vue'
+import {type Component, inject} from 'vue'
 import {FlowNode} from './Node/index'
 
 defineProps<{
@@ -19,12 +19,16 @@ const nodes: Record<string, Component> = {
   exclusive: ExclusiveNode,
   end: EndNode
 }
+const {addNodeRef} = inject<{
+  addNodeRef: (id: string, ref: any) => void
+}>('nodeHooks')!
 </script>
 
 <template>
   <slot/>
   <component
       :node="node"
+      :ref="(el:any) => el && addNodeRef(node.id, el)"
       :is="nodes[node.type]"/>
   <NodeTree v-if="node.child" :node="node.child"/>
 </template>

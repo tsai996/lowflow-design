@@ -7,6 +7,10 @@ export interface ApprovalNode extends FlowNode {
     users: string[]
     // 审批角色
     roles: string[]
+    // 表单内人员
+    formUser: string
+    // 表单内角色
+    formRole: string
     // 主管
     leader: number
     // 自选：true-多选，false-单选
