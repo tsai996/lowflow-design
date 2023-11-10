@@ -15,3 +15,6 @@ https://tsai996.github.io/lowflow-design/
 ![bpmn.png](public%2Fbpmn.png)
 ## 加微信拉入群聊（备注：加群）
 ![wx.png](public%2Fwx.png)
+## 推荐
+大家在使用本项目时，推荐结合贺波老师的书[《深入Activiti流程引擎：核心原理与高阶实战》](https://item.m.jd.com/product/13928958.html?gx=RnAomTM2bmCImZxDqYAkVCoIHuIYVqc)，这本书对系统学习和深入掌握Activiti/Flowable的用法非常有帮助。
+![book.png](public%2Fbook.png)

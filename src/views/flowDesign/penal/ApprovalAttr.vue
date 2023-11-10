@@ -98,7 +98,7 @@ const {node} = useVModels($props, $emits)
           <el-text tag="b">
             同意
           </el-text>
-          <div class="flow-opt-item__second">
+          <div class="flow-opt-item__second">z
             同意描述、同意描述、同意描述、同意描述、同意描述、同意描述
           </div>
         </div>
