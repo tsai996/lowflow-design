@@ -27,7 +27,7 @@ export default defineComponent({
          * 构建属性参数
          * @param fieldClone
          */
-        const buildDataObject = (fieldClone: Field) => {
+        const buildProps = (fieldClone: Field) => {
             const dataObject: Record<string, any> = {}
             const _props = fieldClone.props || {}
             Object.keys(_props).forEach(key => {
@@ -72,19 +72,18 @@ export default defineComponent({
             return children
         }
         return {
-            buildDataObject,
+            buildProps,
             buildSlots
         }
     },
     render() {
         const fieldClone: Field = cloneDeep(this.field)
         const slots = this.buildSlots(fieldClone)
-        const dataObject = this.buildDataObject(fieldClone)
-        const componentName = fieldClone.name
-        const eleComponent = resolveComponent(componentName)
+        const props = this.buildProps(fieldClone)
+        const eleComponent = resolveComponent(fieldClone.name)
         if (typeof eleComponent === 'string') {
-            return h(eleComponent, dataObject, slots)
+            return h(eleComponent, props, slots)
         }
-        return h(eleComponent, dataObject, slots)
+        return h(eleComponent, props, slots)
     }
 })

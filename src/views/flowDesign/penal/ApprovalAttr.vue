@@ -265,7 +265,7 @@ watchEffect(() => {
           <el-text tag="b">
             同意
           </el-text>
-          <div class="flow-opt-item__second">z
+          <div class="flow-opt-item__second">
             同意描述、同意描述、同意描述、同意描述、同意描述、同意描述
           </div>
         </div>
