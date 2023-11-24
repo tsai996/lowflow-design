@@ -9,20 +9,23 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import {FlowNode} from "~/views/flowDesign/nodes/Node/index";
 import {ref} from "vue";
 import {Field} from "~/components/Render/index";
+import {StartNode} from "~/views/flowDesign/nodes/Start/index";
+import {EndNode} from "~/views/flowDesign/nodes/End/index";
 // 流程节点
 const process = ref<FlowNode>({
   id: 'root',
   pid: null,
   type: 'start',
   name: '发起人',
+  formProperties: [],
   child: {
     id: 'end',
     pid: 'root',
     type: 'end',
     name: '结束',
     child: null
-  }
-})
+  } as EndNode
+} as StartNode)
 // 表单字段
 const fields = ref<Field[]>([
   {
