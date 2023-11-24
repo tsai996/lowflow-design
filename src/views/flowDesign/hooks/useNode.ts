@@ -148,7 +148,17 @@ const useNode = (node: Ref<FlowNode>, fields: Ref<Field[]>) => {
             type: 'cc',
             name: '抄送人',
             child: child,
-            users: []
+            users: [],
+            formProperties: fields.value.map(item => {
+                return {
+                    id: item.id,
+                    name: item.title,
+                    readable: true,
+                    writeable: false,
+                    hidden: false,
+                    required: false
+                } as FormProperty
+            })
         } as CcNode
         if (child) {
             child.pid = id
