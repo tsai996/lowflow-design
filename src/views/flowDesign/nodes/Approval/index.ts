@@ -1,4 +1,5 @@
 import {FlowNode} from '../Node/index'
+import {FormProperty, OperationPermissions} from "~/views/flowDesign/index";
 
 export interface ApprovalNode extends FlowNode {
     // 审批方式
@@ -21,17 +22,8 @@ export interface ApprovalNode extends FlowNode {
     multi: "sequential" | "joint" | "single"
     // 审批人为空时处理方式：reject-驳回，admin-管理员，pass-通过
     nobody: 'reject' | 'pass'
+    // 表单字段
+    formProperties: FormProperty[]
     // 操作权限
-    operations: {
-        // 同意
-        complete: boolean
-        // 拒绝
-        refuse: boolean
-        // 转办
-        transfer: boolean
-        // 加签
-        addMulti: boolean
-        // 减签
-        minusMulti: boolean
-    }
+    operations: OperationPermissions
 }

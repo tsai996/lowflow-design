@@ -17,9 +17,10 @@ export default defineComponent({
     emits: ['update:modelValue'],
     components: {
         Input: defineAsyncComponent(() => import('element-plus/es').then(({ElInput}) => ElInput)),
+        Number: defineAsyncComponent(() => import('element-plus/es').then(({ElInputNumber}) => ElInputNumber)),
         Select: defineAsyncComponent(() => import('element-plus/es').then(({ElSelect}) => ElSelect)),
         Radio: defineAsyncComponent(() => import('element-plus/es').then(({ElRadio}) => ElRadio)),
-        Checkbox: defineAsyncComponent(() => import('element-plus/es').then(({ElCheckbox}) => ElCheckbox)),
+        Checkbox: defineAsyncComponent(() => import('element-plus/es').then(({ElCheckbox}) => ElCheckbox))
     },
     setup(props, {emit}) {
         /**
@@ -36,6 +37,7 @@ export default defineComponent({
             dataObject['onUpdate:modelValue'] = (value: any) => {
                 emit('update:modelValue', value)
             }
+            delete dataObject.options
             return dataObject
         }
         /**

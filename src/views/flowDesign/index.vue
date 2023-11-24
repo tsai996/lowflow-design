@@ -3,18 +3,19 @@ import NodeTree from './nodes/index.vue'
 import NodePenal from './penal/index.vue'
 import {FlowNode} from './nodes/Node/index'
 import useNode from './hooks/useNode'
-import {computed, onMounted, onUnmounted, provide, reactive, ref} from "vue";
+import {computed, onUnmounted, provide, ref} from "vue";
 import {Plus, Minus} from "@element-plus/icons-vue";
-import {getList} from "~/api/modules/user";
 import {useVModels} from "@vueuse/core";
+import {Field} from "~/components/Render/index";
 
 export interface FlowDesignProps {
   process: FlowNode,
-  // fields: Field[]
+  fields: Field[]
 }
+
 const $props = defineProps<FlowDesignProps>()
-const $emits = defineEmits(['update:process'])
-const {process} = useVModels($props, $emits)
+const $emits = defineEmits(['update:process', 'update:fields'])
+const {process, fields} = useVModels($props, $emits)
 
 const nodePenalRef = ref<InstanceType<typeof NodePenal>>()
 const zoom = ref(100)
@@ -22,9 +23,10 @@ const getScale = computed(() => zoom.value / 100)
 const openPenal = (node: FlowNode) => {
   nodePenalRef.value?.open(node)
 }
-const {addNode, delNode, validateNodes,addNodeRef} = useNode(process)
+const {addNode, delNode, validateNodes, addNodeRef} = useNode(process, fields)
 provide('nodeHooks', {
   readOnly: false,
+  fields: fields,
   addNode,
   delNode,
   addNodeRef,

@@ -5,8 +5,10 @@ import {ConditionNode, FilterRules} from '../nodes/Condition/index'
 import {ApprovalNode} from '../nodes/Approval/index'
 import {CcNode} from '../nodes/Cc/index'
 import {ref, Ref} from "vue";
+import {FormProperty} from "~/views/flowDesign/index";
+import {Field} from "~/components/Render/index";
 
-const useNode = (node: Ref<FlowNode>) => {
+const useNode = (node: Ref<FlowNode>, fields: Ref<Field[]>) => {
     /**
      * 节点错误信息
      */
@@ -106,13 +108,24 @@ const useNode = (node: Ref<FlowNode>) => {
             users: [],
             roles: [],
             leader: 1,
-            multi: 'sequential',
             choice: false,
             self: false,
+            multi: 'sequential',
             nobody: 'pass',
+            formProperties: fields.value.map(item => {
+                return {
+                    id: item.id,
+                    name: item.title,
+                    readable: true,
+                    writeable: false,
+                    hidden: false,
+                    required: false
+                } as FormProperty
+            }),
             operations: {
                 complete: true,
                 refuse: true,
+                save: true,
                 transfer: false,
                 addMulti: false,
                 minusMulti: false
