@@ -1,0 +1,88 @@
+import {defineAsyncComponent, defineComponent, h, PropType, resolveComponent} from "vue";
+import {cloneDeep} from 'lodash-es'
+import {Field} from "./index";
+
+export default defineComponent({
+    props: {
+        modelValue: {
+            type: [String, Number, Boolean, Array, Object] as PropType<any>,
+            default: undefined,
+            required: false
+        },
+        field: {
+            type: Object as PropType<Field>,
+            required: true
+        }
+    },
+    emits: ['update:modelValue'],
+    components: {
+        Input: defineAsyncComponent(() => import('element-plus/es').then(({ElInput}) => ElInput)),
+        Select: defineAsyncComponent(() => import('element-plus/es').then(({ElSelect}) => ElSelect)),
+        Radio: defineAsyncComponent(() => import('element-plus/es').then(({ElRadio}) => ElRadio)),
+        Checkbox: defineAsyncComponent(() => import('element-plus/es').then(({ElCheckbox}) => ElCheckbox)),
+    },
+    setup(props, {emit}) {
+        /**
+         * 构建属性参数
+         * @param fieldClone
+         */
+        const buildDataObject = (fieldClone: Field) => {
+            const dataObject: Record<string, any> = {}
+            const _props = fieldClone.props || {}
+            Object.keys(_props).forEach(key => {
+                dataObject[key] = _props[key]
+            })
+            dataObject.modelValue = fieldClone.value
+            dataObject['onUpdate:modelValue'] = (value: any) => {
+                emit('update:modelValue', value)
+            }
+            return dataObject
+        }
+        /**
+         * 构建插槽
+         * @param fieldClone
+         */
+        const buildSlots = (fieldClone: Field) => {
+            let children: Record<string, any> = {}
+            const slotFunctions: Record<string, any> = {
+                Select: (conf: Field) => {
+                    return conf.props.options.map((item: any) => {
+                        return <el-option label={item.label} value={item.value}></el-option>
+                    })
+                },
+                Radio: (conf: Field) => {
+                    return conf.props.options.map((item: any) => {
+                        return <el-radio label={item.value}>{item.label}</el-radio>
+                    })
+                },
+                Checkbox: (conf: Field) => {
+                    return conf.props.options.map((item: any) => {
+                        return <el-checkbox label={item.value}>{item.label}</el-checkbox>
+                    })
+                }
+            }
+            const slotFunction = slotFunctions[fieldClone.name]
+            if (slotFunction) {
+                children.default = () => {
+                    return slotFunction(fieldClone)
+                }
+            }
+            return children
+        }
+        return {
+            buildDataObject,
+            buildSlots
+        }
+    },
+    render() {
+        const fieldClone: Field = cloneDeep(this.field)
+        const slots = this.buildSlots(fieldClone)
+        const dataObject = this.buildDataObject(fieldClone)
+        const componentName = fieldClone.name
+        const eleComponent = resolveComponent(componentName)
+        if (typeof eleComponent === 'string') {
+            return h(eleComponent, dataObject, slots)
+        }
+        return h(eleComponent, dataObject, slots)
+    }
+})

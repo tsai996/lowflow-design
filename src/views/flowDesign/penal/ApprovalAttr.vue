@@ -50,16 +50,16 @@ const {node} = useVModels($props, $emits)
         <el-form-item prop="leader" label="多级上级" v-if="node.assigneeType === 'leader'">
           <el-select v-model="node.leader" placeholder="请选择多级上级">
             <el-option label="直属上级" :value="1"></el-option>
-            <el-option label="二级上级" :value="2"></el-option>
-            <el-option label="三级上级" :value="3"></el-option>
-            <el-option label="四级上级" :value="4"></el-option>
-            <el-option label="五级上级" :value="5"></el-option>
-            <el-option label="六级上级" :value="6"></el-option>
-            <el-option label="七级上级" :value="7"></el-option>
-            <el-option label="八级上级" :value="8"></el-option>
-            <el-option label="九级上级" :value="9"></el-option>
-            <el-option label="十级上级" :value="10"></el-option>
-            <el-option label="十一级上级" :value="11"></el-option>
+            <el-option label="2级上级" :value="2"></el-option>
+            <el-option label="3级上级" :value="3"></el-option>
+            <el-option label="4级上级" :value="4"></el-option>
+            <el-option label="5级上级" :value="5"></el-option>
+            <el-option label="6级上级" :value="6"></el-option>
+            <el-option label="7级上级" :value="7"></el-option>
+            <el-option label="8级上级" :value="8"></el-option>
+            <el-option label="9级上级" :value="9"></el-option>
+            <el-option label="10级上级" :value="10"></el-option>
+            <el-option label="11级上级" :value="11"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item prop="roles" label="指定角色" v-if="node.assigneeType === 'role'">
