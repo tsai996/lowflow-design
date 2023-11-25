@@ -21,7 +21,8 @@ export default defineComponent({
         Select: defineAsyncComponent(() => import('element-plus/es').then(({ElSelect}) => ElSelect)),
         Radio: defineAsyncComponent(() => import('element-plus/es').then(({ElRadio}) => ElRadio)),
         Checkbox: defineAsyncComponent(() => import('element-plus/es').then(({ElCheckbox}) => ElCheckbox)),
-        UserSelection: defineAsyncComponent(() => import('~/components/UserSelection/index'))
+        UserSelection: defineAsyncComponent(() => import('~/components/UserSelection/index')),
+        RoleSelection: defineAsyncComponent(() => import('~/components/RoleSelection/index'))
     },
     setup(props, {emit}) {
         /**

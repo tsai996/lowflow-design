@@ -1,6 +1,10 @@
 import user from "./user";
+import role from "./role";
 
-const mockModules = [...user];
+const mockModules =  {
+    user,
+    role
+}
 export default mockModules
 
 

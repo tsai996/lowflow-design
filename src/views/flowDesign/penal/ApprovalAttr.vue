@@ -6,6 +6,8 @@ import {computed, inject, Ref, ref, watchEffect} from "vue";
 import {CircleCheck, CircleClose, Switch, Plus, Minus} from "@element-plus/icons-vue";
 import {Field} from "~/components/Render/interface";
 import {FormProperty} from "~/views/flowDesign/index";
+import UserSelection from "~/components/UserSelection";
+import RoleSelection from "~/components/RoleSelection";
 
 const activeName = ref('properties')
 
@@ -190,7 +192,7 @@ watchEffect(() => {
           </el-select>
         </el-form-item>
         <el-form-item prop="roles" label="指定角色" v-if="node.assigneeType === 'role'">
-          待添加...
+          <role-selection multiple placeholder="请选择角色" v-model="node.roles"/>
         </el-form-item>
         <el-form-item prop="formUser" label="表单内人员" v-if="node.assigneeType === 'formUser'">
           <el-select placeholder="选择表单内人员" v-model="node.formUser">
@@ -202,7 +204,13 @@ watchEffect(() => {
           </el-select>
         </el-form-item>
         <el-form-item prop="formRole" label="表单内角色" v-if="node.assigneeType === 'formRole'">
-          待添加...
+          <el-select placeholder="选择表单内角色" v-model="node.formUser">
+            <el-option
+                v-for="item in fields.filter(e=>e.name === 'RoleSelection')"
+                :key="item.id"
+                :label="item.title"
+                :value="item.id"/>
+          </el-select>
         </el-form-item>
         <el-form-item prop="method" label="多人审批方式">
           <el-radio-group class="flex-column" v-model="node.multi">

@@ -1,5 +1,5 @@
 import {MockMethod} from "vite-plugin-mock";
-import {ResultData, ResultPage} from "../src/api";
+import {ResultData} from "../src/api";
 
 const userList = [
     {
@@ -56,7 +56,7 @@ const user = [
     {
         url: "/api/user/info",
         method: "get",
-        response: (req) => {
+        response: (req:any) => {
             const username = req.query.username;
             return {
                 code: 200,
@@ -69,7 +69,7 @@ const user = [
     {
         url: "/api/user/list",
         method: "post",
-        response: (req) => {
+        response: (req:any) => {
             const userIds = req.body.userIds
             return {
                 code: 200,
