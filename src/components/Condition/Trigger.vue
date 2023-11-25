@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Field} from "~/components/Render/index";
+import {Field} from "~/components/Render/interface";
 import {FilterRules} from "~/components/Condition/index";
 import {useVModel} from "@vueuse/core";
 

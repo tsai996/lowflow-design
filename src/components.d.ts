@@ -40,7 +40,8 @@ declare module 'vue' {
     ElText: typeof import('element-plus/es')['ElText']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElTree: typeof import('element-plus/es')['ElTree']
-    Render: typeof import('./components/Render/index.ts')['default']
+    Interface: typeof import('./components/Render/interface.ts')['default']
+    Render: typeof import('./components/Render/interface.ts')['default']
     Segmented: typeof import('./components/Segmented/index.ts')['default']
     UserSelection: typeof import('./components/UserSelection/index.ts')['default']
   }

@@ -6,7 +6,7 @@ import {ApprovalNode} from '../nodes/Approval/index'
 import {CcNode} from '../nodes/Cc/index'
 import {ref, Ref} from "vue";
 import {FormProperty} from "~/views/flowDesign/index";
-import {Field} from "~/components/Render/index";
+import {Field} from "~/components/Render/interface";
 
 const useNode = (node: Ref<FlowNode>, fields: Ref<Field[]>) => {
     /**

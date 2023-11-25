@@ -4,7 +4,7 @@ import {useVModels} from '@vueuse/core'
 import {ApprovalNode} from '../nodes/Approval/index'
 import {computed, inject, Ref, ref, watchEffect} from "vue";
 import {CircleCheck, CircleClose, Switch, Plus, Minus} from "@element-plus/icons-vue";
-import {Field} from "~/components/Render/index";
+import {Field} from "~/components/Render/interface";
 import {FormProperty} from "~/views/flowDesign/index";
 
 const activeName = ref('properties')

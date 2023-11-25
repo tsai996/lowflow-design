@@ -6,7 +6,7 @@ import useNode from './hooks/useNode'
 import {computed, onUnmounted, provide, ref} from "vue";
 import {Plus, Minus} from "@element-plus/icons-vue";
 import {useVModels} from "@vueuse/core";
-import {Field} from "~/components/Render/index";
+import {Field} from "~/components/Render/interface";
 
 export interface FlowDesignProps {
   process: FlowNode,

@@ -1,11 +1,11 @@
 <script setup lang="ts" name="ConditionFilter">
 import {FilterRules} from "~/components/Condition/index";
-import {Field} from "~/components/Render/index";
+import {Field} from "~/components/Render/interface";
 import {useVModel} from "@vueuse/core";
 import {Delete} from "@element-plus/icons-vue";
 import Trigger from './Trigger.vue'
 import Operator from './Operator.vue'
-import Render from '~/components/Render/index.tsx'
+import Render from '~/components/Render/index'
 
 const $props = defineProps<{
   filterFields: Field[],

@@ -1,6 +1,6 @@
 import {defineAsyncComponent, defineComponent, h, PropType, resolveComponent} from "vue";
 import {cloneDeep} from 'lodash-es'
-import {Field} from "./index";
+import {Field} from "./interface";
 
 export default defineComponent({
     props: {
