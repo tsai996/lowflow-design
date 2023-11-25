@@ -3,9 +3,10 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "mock": "vite --mode mock --force",
     "dev": "vite",
-    "build": "vite build --mode development",
+    "build:dev": "vite build --mode development",
+    "build:test": "vite build --mode test",
+    "mock": "vite --mode mock --force",
     "generate": "vite-ssg build",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit"
@@ -13,10 +14,12 @@
   "dependencies": {
     "axios": "^1.5.1",
     "element-plus": "^2.3.12",
+    "file-saver": "^2.0.5",
     "vue": "^3.3.4"
   },
   "devDependencies": {
     "@iconify-json/ep": "^1.1.12",
+    "@types/file-saver": "^2.0.5",
     "@types/node": "^20.6.0",
     "@vitejs/plugin-vue": "^4.3.4",
     "@vitejs/plugin-vue-jsx": "^3.0.1",

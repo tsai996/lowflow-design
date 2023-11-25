@@ -7,6 +7,7 @@ import {computed, onUnmounted, provide, ref} from "vue";
 import {Plus, Minus} from "@element-plus/icons-vue";
 import {useVModels} from "@vueuse/core";
 import {Field} from "~/components/Render/interface";
+import {downloadXml} from "~/api/modules/model";
 
 export interface FlowDesignProps {
   process: FlowNode,
@@ -48,6 +49,25 @@ const handleZoom = (e: WheelEvent) => {
 const validate = () => {
   validateNodes()
 }
+const converterBpmn = () => {
+  const processModel = {
+    code: 'test',
+    name: '测试',
+    icon: {
+      name: 'el:HomeFilled',
+      color: '#409EFF',
+    },
+    process: process.value,
+    form: {
+      fields: fields.value
+    },
+    version: 1,
+    sort: 0,
+    groupId: '',
+    remark: '',
+  }
+  downloadXml(processModel)
+}
 // 按住shift键滚动鼠标滚轮，可以放大/缩小
 window.addEventListener('wheel', handleZoom)
 // 离开页面时，销毁事件监听
@@ -64,6 +84,7 @@ onUnmounted(() => {
       <span>{{ zoom }}%</span>
       <el-button :icon="Minus" @click="zoom -= 10" circle :disabled="zoom <= 50"></el-button>
       <el-button @click="validate">校验</el-button>
+      <el-button @click="converterBpmn">转bpmn</el-button>
     </div>
     <!--流程树-->
     <div class="node-container">

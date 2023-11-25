@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   axios:
     specifier: ^1.5.1
@@ -7,6 +11,9 @@ dependencies:
   element-plus:
     specifier: ^2.3.12
     version: 2.3.12(vue@3.3.4)
+  file-saver:
+    specifier: ^2.0.5
+    version: 2.0.5
   vue:
     specifier: ^3.3.4
     version: 3.3.4
@@ -15,6 +22,9 @@ devDependencies:
   '@iconify-json/ep':
     specifier: ^1.1.12
     version: 1.1.12
+  '@types/file-saver':
+    specifier: ^2.0.5
+    version: 2.0.7
   '@types/node':
     specifier: ^20.6.0
     version: 20.6.0
@@ -721,6 +731,10 @@ packages:
 
   /@types/estree@1.0.2:
     resolution: {integrity: sha512-VeiPZ9MMwXjO32/Xu7+OwflfmeoRwkE/qzndw42gGtgJwZopBnzy2gD//NN1+go1mADzkDcqf/KnFRSjTJ8xJA==}
+    dev: true
+
+  /@types/file-saver@2.0.7:
+    resolution: {integrity: sha512-dNKVfHd/jk0SkR/exKGj2ggkB45MAkzvWCaqLUUgkyjITkGNzH8H+yUwr+BLJUBjZOe9w8X3wgmXhZDRg1ED6A==}
     dev: true
 
   /@types/lodash-es@4.17.9:
@@ -1630,6 +1644,10 @@ packages:
     dependencies:
       reusify: 1.0.4
     dev: true
+
+  /file-saver@2.0.5:
+    resolution: {integrity: sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==}
+    dev: false
 
   /fill-range@7.0.1:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}

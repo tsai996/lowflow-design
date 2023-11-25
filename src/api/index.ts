@@ -48,7 +48,7 @@ class RequestHttp {
         // 请求拦截
         this.service.interceptors.request.use(
             (config: InternalAxiosRequestConfig) => {
-                config.headers['Authorization'] = "Bearer 87779e5a-3342-4df6-865d-d8828800d6fb"
+                // config.headers['Authorization'] = "Bearer 87779e5a-3342-4df6-865d-d8828800d6fb"
                 return config
             },
             (error: AxiosError) => {
