@@ -2,7 +2,7 @@
 import {FilterRules} from "~/components/Condition/index";
 import {Field} from "~/components/Render/interface";
 import {useVModel} from "@vueuse/core";
-import {Delete} from "@element-plus/icons-vue";
+import {Delete, CirclePlus, CircleClose} from "@element-plus/icons-vue";
 import Trigger from './Trigger.vue'
 import Operator from './Operator.vue'
 import Render from '~/components/Render/index'
@@ -80,7 +80,8 @@ const delGroup = (index: number) => {
     </div>
     <div class="filter-option-content">
       <el-form :label-width="0" :inline="true" :model="filterRules">
-        <el-row v-for="(item, index) in filterRules.conditions" :key="`${item.field}-${index}`" :gutter="5" class="filter-item-rule">
+        <el-row v-for="(item, index) in filterRules.conditions" :key="`${item.field}-${index}`" :gutter="5"
+                class="filter-item-rule">
           <el-col :xs="24" :sm="7">
             <el-form-item :prop="'conditions.' + index + '.field'" style="width: 100%;">
               <trigger
@@ -124,7 +125,7 @@ const delGroup = (index: number) => {
             v-model="filterRules.groups[index]"
             :filterFields="filterFields"
         >
-          <el-button @click="delGroup(index)" icon="CircleClose" class="filter-filter-item__add">
+          <el-button @click="delGroup(index)" :icon="CircleClose" class="filter-filter-item__add">
             删除条件组
           </el-button>
         </ConditionFilter>
@@ -132,10 +133,10 @@ const delGroup = (index: number) => {
              class="filter-item-rule"/>
       </el-form>
       <div class="filter-item-rule">
-        <el-button @click="addRule" icon="CirclePlus" class="filter-filter-item__add">
+        <el-button @click="addRule" :icon="CirclePlus" class="filter-filter-item__add">
           添加条件
         </el-button>
-        <el-button @click="addGroup" icon="CirclePlus" class="filter-filter-item__add">
+        <el-button @click="addGroup" :icon="CirclePlus" class="filter-filter-item__add">
           添加条件组
         </el-button>
         <slot/>
@@ -154,6 +155,7 @@ const delGroup = (index: number) => {
   background-color: var(--el-fill-color-blank);
   border-radius: 3px;
   display: flex;
+
   .logical-operator {
     position: relative;
     display: flex;
