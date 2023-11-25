@@ -29,7 +29,7 @@ $--colors: (
 @forward "element-plus/theme-chalk/src/common/var.scss" with (
   // do not use same name, it will override.
   $colors: $--colors,
-  $button-padding-horizontal: ("default": 50px)
+  // $button-padding-horizontal: ("default": 50px)
 );
 
 // if you want to import all

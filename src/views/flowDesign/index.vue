@@ -4,7 +4,7 @@ import NodePenal from './penal/index.vue'
 import {FlowNode} from './nodes/Node/index'
 import useNode from './hooks/useNode'
 import {computed, onUnmounted, provide, ref} from "vue";
-import {Plus, Minus} from "@element-plus/icons-vue";
+import {Plus, Minus, Download} from "@element-plus/icons-vue";
 import {useVModels} from "@vueuse/core";
 import {Field} from "~/components/Render/interface";
 import {downloadXml} from "~/api/modules/model";
@@ -84,7 +84,7 @@ onUnmounted(() => {
       <span>{{ zoom }}%</span>
       <el-button :icon="Minus" @click="zoom -= 10" circle :disabled="zoom <= 50"></el-button>
       <el-button @click="validate">校验</el-button>
-      <el-button @click="converterBpmn">转bpmn</el-button>
+      <el-button @click="converterBpmn" type="primary" :icon="Download">转bpmn</el-button>
     </div>
     <!--流程树-->
     <div class="node-container">
