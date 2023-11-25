@@ -204,7 +204,7 @@ watchEffect(() => {
           </el-select>
         </el-form-item>
         <el-form-item prop="formRole" label="表单内角色" v-if="node.assigneeType === 'formRole'">
-          <el-select placeholder="选择表单内角色" v-model="node.formUser">
+          <el-select placeholder="选择表单内角色" v-model="node.formRole">
             <el-option
                 v-for="item in fields.filter(e=>e.name === 'RoleSelection')"
                 :key="item.id"
