@@ -2,8 +2,6 @@ import path from 'path'
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import Components from 'unplugin-vue-components/vite'
-import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import {viteMockServe} from "vite-plugin-mock"
 
@@ -43,19 +41,6 @@ export default defineConfig({
             injectCode: ` import { setupProdMockServer } from './mockProdServer'; setupProdMockServer(); `,
         }),
         VueSetupExtend(),
-        Components({
-            // allow auto load markdown components under `./src/components/`
-            extensions: ['ts'],
-            // allow auto import and register components used in markdown
-            include: [/\.vue$/, /\.vue\?vue/, /\.md$/, /\.[tj]sx?$/],
-            resolvers: [
-                ElementPlusResolver({
-                    importStyle: 'sass',
-                }),
-            ],
-            dts: 'src/components.d.ts',
-        }),
-
         // https://github.com/antfu/unocss
         // see unocss.config.ts for config
         Unocss({

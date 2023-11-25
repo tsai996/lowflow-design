@@ -49,7 +49,7 @@ const fields = ref<Field[]>([
     value: null,
     props: {
       disabled: false,
-      placeholder: "请输入请假天数",
+      placeholder: "请假天数",
       style: {
         width: "100%"
       },
