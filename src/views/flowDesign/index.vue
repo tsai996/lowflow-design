@@ -4,7 +4,7 @@ import NodePenal from './penal/index.vue'
 import {FlowNode} from './nodes/Node/index'
 import useNode from './hooks/useNode'
 import {computed, onUnmounted, provide, ref} from "vue";
-import {Plus, Minus, Download} from "@element-plus/icons-vue";
+import {Plus, Minus, Download, Sunny, Moon} from "@element-plus/icons-vue";
 import {useVModels} from "@vueuse/core";
 import {Field} from "~/components/Render/interface";
 import {downloadXml} from "~/api/modules/model";
@@ -21,6 +21,14 @@ const {process, fields} = useVModels($props, $emits)
 const nodePenalRef = ref<InstanceType<typeof NodePenal>>()
 const zoom = ref(100)
 const getScale = computed(() => zoom.value / 100)
+const isDark = ref<boolean>(false)
+const handleToggleDark = () => {
+  if (isDark.value) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+}
 const openPenal = (node: FlowNode) => {
   nodePenalRef.value?.open(node)
 }
@@ -78,6 +86,14 @@ onUnmounted(() => {
 
 <template>
   <div class="designer-container">
+    <div class="dark">
+      <el-switch
+          inline-prompt
+          :active-icon="Sunny"
+          :inactive-icon="Moon"
+          @change="handleToggleDark"
+          v-model="isDark"/>
+    </div>
     <!--放大/缩小-->
     <div class="zoom">
       <el-button :icon="Plus" @click="zoom += 10" :disabled="zoom >= 170" circle></el-button>
@@ -115,6 +131,13 @@ onUnmounted(() => {
     span {
       margin: 0 10px;
     }
+  }
+
+  .dark {
+    position: fixed;
+    z-index: 999;
+    top: 10px;
+    left: 20px;
   }
 
   .node-container {
