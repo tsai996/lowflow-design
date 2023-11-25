@@ -125,8 +125,8 @@ onUnmounted(() => {
   .zoom {
     position: fixed;
     z-index: 999;
-    top: 40px;
-    right: 30px;
+    top: 20px;
+    right: 20px;
 
     span {
       margin: 0 10px;
