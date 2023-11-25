@@ -5,11 +5,13 @@ import {type Component, ref} from 'vue'
 import ApprovalAttr from './ApprovalAttr.vue'
 import CcAttr from './CcAttr.vue'
 import StartAttr from './StartAttr.vue'
+import ConditionAttr from "./ConditionAttr.vue";
 
 const nodeProps: Record<string, Component> = {
   start: StartAttr,
   approval: ApprovalAttr,
-  cc: CcAttr
+  cc: CcAttr,
+  condition: ConditionAttr
 }
 
 let flowNode = ref<FlowNode>({

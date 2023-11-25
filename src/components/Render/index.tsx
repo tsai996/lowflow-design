@@ -20,7 +20,8 @@ export default defineComponent({
         Number: defineAsyncComponent(() => import('element-plus/es').then(({ElInputNumber}) => ElInputNumber)),
         Select: defineAsyncComponent(() => import('element-plus/es').then(({ElSelect}) => ElSelect)),
         Radio: defineAsyncComponent(() => import('element-plus/es').then(({ElRadio}) => ElRadio)),
-        Checkbox: defineAsyncComponent(() => import('element-plus/es').then(({ElCheckbox}) => ElCheckbox))
+        Checkbox: defineAsyncComponent(() => import('element-plus/es').then(({ElCheckbox}) => ElCheckbox)),
+        UserSelection: defineAsyncComponent(() => import('~/components/UserSelection/index'))
     },
     setup(props, {emit}) {
         /**
@@ -33,7 +34,11 @@ export default defineComponent({
             Object.keys(_props).forEach(key => {
                 dataObject[key] = _props[key]
             })
-            dataObject.modelValue = fieldClone.value
+            if (props.modelValue !== undefined) {
+                dataObject.modelValue = props.modelValue
+            } else {
+                dataObject.modelValue = fieldClone.value
+            }
             dataObject['onUpdate:modelValue'] = (value: any) => {
                 emit('update:modelValue', value)
             }
