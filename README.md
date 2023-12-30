@@ -19,8 +19,9 @@ https://tsai996.github.io/lowflow-design/
     <img alt="属性面板" src="public/penal.png" style="display: inline-block"/>
 </p>
 
-## 加微信拉入群聊（备注：加群）
+## 扫码加入群聊，如果失效加微信拉入群聊（备注：加群）
 <p>
+    <img alt="微信群" src="public/wxq.png" width="240" style="display: inline-block"/>
     <img alt="微信" src="public/wx.png" width="240" style="display: inline-block"/>
 </p>
 
