@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import Node from '../Node/index.vue'
-import {StartNode} from "./index";
-import Content from './content'
+import {FlowNode} from '../Node/index'
+import Content from './content.vue'
 
 export interface StartProps {
-  node: StartNode
+  node: FlowNode
 }
 
 withDefaults(defineProps<StartProps>(), {})
