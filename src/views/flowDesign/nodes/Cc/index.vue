@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Node from '../Node/index.vue'
 import {CcNode} from '../Cc/index'
-import Content from './content.vue'
+import Content from './content'
 import {ErrorInfo} from '../Node/index'
 import {ref} from "vue";
 
