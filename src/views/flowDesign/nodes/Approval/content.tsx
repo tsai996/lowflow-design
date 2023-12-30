@@ -1,4 +1,4 @@
-import {defineComponent, inject, PropType, ref, Ref, VNode, watchEffect} from "vue";
+import {defineComponent, inject, PropType, ref, Ref, VNode} from "vue";
 import {ApprovalNode} from './index'
 import {Field} from "~/components/Render/interface";
 import {getList as getRoles} from '~/api/modules/role'
@@ -17,7 +17,7 @@ export default defineComponent({
             fields: Ref<Field[]>
         }>('nodeHooks')!
         const content = ref<VNode>(<span></span>);
-        watchEffect(() => {
+        const renderContent = (): VNode => {
             if (props.node.assigneeType === 'choice') {
                 content.value = <span>{`发起人自选（${props.node.choice ? '多选' : '单选'}）`}</span>
             } else if (props.node.assigneeType === 'self') {
@@ -53,12 +53,13 @@ export default defineComponent({
             } else {
                 content.value = <span>{props.node.name}</span>
             }
-        })
+            return content.value
+        }
         return {
-            content
+            renderContent
         }
     },
     render() {
-        return <el-text>{this.content}</el-text>
+        return <el-text>{this.renderContent()}</el-text>
     }
 })

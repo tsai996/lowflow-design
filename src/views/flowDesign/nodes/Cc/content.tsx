@@ -1,4 +1,4 @@
-import {defineComponent, PropType, ref, VNode, watchEffect} from "vue";
+import {defineComponent, PropType, ref, VNode} from "vue";
 import {CcNode} from './index'
 import {getList as getUsers} from '~/api/modules/user'
 
@@ -11,7 +11,7 @@ export default defineComponent({
     },
     setup(props) {
         const content = ref<VNode>(<span></span>);
-        watchEffect(() => {
+        const renderContent = (): VNode => {
             if (props.node.users.length > 0) {
                 getUsers(props.node.users).then(res => {
                     if (res.success) {
@@ -21,12 +21,13 @@ export default defineComponent({
             } else {
                 content.value = <span>未指定人员</span>
             }
-        })
+            return content.value
+        }
         return {
-            content
+            renderContent
         }
     },
     render() {
-        return <el-text>{this.content}</el-text>
+        return <el-text>{this.renderContent()}</el-text>
     }
 })
