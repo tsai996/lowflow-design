@@ -20,9 +20,7 @@ const $props = defineProps<FlowDesignProps>()
 const $emits = defineEmits(['update:process', 'update:fields'])
 const {fields} = useVModels($props, $emits)
 const process = ref<FlowNode>($props.process)
-const { undo, redo, canUndo, canRedo} = useRefHistory(process,
-    {deep: true, clone: cloneDeep }
-)
+const { undo, redo, canUndo, canRedo} = useRefHistory(process, {deep: true, clone: cloneDeep })
 const nodePenalRef = ref<InstanceType<typeof NodePenal>>()
 const zoom = ref(100)
 const getScale = computed(() => zoom.value / 100)

@@ -2,7 +2,7 @@
 import Segmented from '~/components/Segmented'
 import {useVModels} from '@vueuse/core'
 import {StartNode} from '../nodes/Start/index'
-import {computed, inject, Ref, ref, watchEffect} from "vue";
+import {computed, inject, onMounted, Ref, ref} from "vue"
 import {Field} from "~/components/Render/interface";
 import {FormProperty} from "~/views/flowDesign/index";
 
@@ -122,7 +122,7 @@ const changeRequired = (row: FormProperty) => {
     row.hidden = false
   }
 }
-watchEffect(() => {
+onMounted(() => {
   const formProperties = node.value.formProperties
   node.value.formProperties = fields.value.filter(e => e.value !== undefined).map(e => ({
     id: e.id,

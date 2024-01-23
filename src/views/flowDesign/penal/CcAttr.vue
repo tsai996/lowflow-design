@@ -2,7 +2,7 @@
 import Segmented from '~/components/Segmented'
 import {useVModels} from '@vueuse/core'
 import {CcNode} from '../nodes/Cc/index'
-import {computed, inject, Ref, ref, watchEffect} from "vue";
+import {computed, inject, Ref, ref, onMounted} from "vue"
 import {Field} from "~/components/Render/interface";
 
 const activeName = ref('properties')
@@ -38,7 +38,7 @@ const allHidden = computed({
   }
 })
 
-watchEffect(() => {
+onMounted(() => {
   const formProperties = node.value.formProperties
   node.value.formProperties = fields.value.filter(e => e.value !== undefined).map(e => ({
     id: e.id,

@@ -2,7 +2,7 @@
 import Segmented from '~/components/Segmented'
 import {useVModels} from '@vueuse/core'
 import {ApprovalNode} from '../nodes/Approval/index'
-import {computed, inject, Ref, ref, watchEffect} from "vue";
+import {computed, inject, Ref, ref, onMounted} from "vue"
 import {CircleCheck, CircleClose, Switch, Plus, Minus} from "@element-plus/icons-vue";
 import {Field} from "~/components/Render/interface";
 import {FormProperty} from "~/views/flowDesign/index";
@@ -125,7 +125,7 @@ const changeHidden = (row: FormProperty) => {
     row.required = false
   }
 }
-watchEffect(() => {
+onMounted(() => {
   const formProperties = node.value.formProperties
   node.value.formProperties = fields.value.filter(e => e.value !== undefined).map(e => ({
     id: e.id,
