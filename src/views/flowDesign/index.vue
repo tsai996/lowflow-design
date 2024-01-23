@@ -4,10 +4,12 @@ import NodePenal from './penal/index.vue'
 import {FlowNode} from './nodes/Node/index'
 import useNode from './hooks/useNode'
 import {computed, onUnmounted, provide, ref} from "vue";
-import {Plus, Minus, Download, Sunny, Moon} from "@element-plus/icons-vue";
+import {Plus, Minus, Download, Sunny, Moon, TopRight, TopLeft} from "@element-plus/icons-vue";
 import {useVModels} from "@vueuse/core";
 import {Field} from "~/components/Render/interface";
 import {downloadXml} from "~/api/modules/model";
+import {useRefHistory} from '@vueuse/core'
+import {cloneDeep} from "lodash-es";
 
 export interface FlowDesignProps {
   process: FlowNode,
@@ -16,8 +18,11 @@ export interface FlowDesignProps {
 
 const $props = defineProps<FlowDesignProps>()
 const $emits = defineEmits(['update:process', 'update:fields'])
-const {process, fields} = useVModels($props, $emits)
-
+const {fields} = useVModels($props, $emits)
+const process = ref<FlowNode>($props.process)
+const { undo, redo, canUndo, canRedo} = useRefHistory(process,
+    {deep: true, clone: cloneDeep }
+)
 const nodePenalRef = ref<InstanceType<typeof NodePenal>>()
 const zoom = ref(100)
 const getScale = computed(() => zoom.value / 100)
@@ -99,6 +104,8 @@ onUnmounted(() => {
       <el-button :icon="Plus" @click="zoom += 10" :disabled="zoom >= 170" circle></el-button>
       <span>{{ zoom }}%</span>
       <el-button :icon="Minus" @click="zoom -= 10" circle :disabled="zoom <= 50"></el-button>
+      <el-button @click="undo()" :disabled="!canUndo" :icon="TopLeft">撤销</el-button>
+      <el-button @click="redo()" :disabled="!canRedo" :icon="TopRight">重做</el-button>
       <el-button @click="validate">校验</el-button>
       <el-button @click="converterBpmn" type="primary" :icon="Download">转bpmn</el-button>
     </div>
