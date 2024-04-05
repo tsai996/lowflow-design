@@ -38,7 +38,7 @@ defineExpose({
 </script>
 
 <template>
-  <el-drawer v-model="visible" size="35%">
+  <el-drawer v-model="visible" destroy-on-close size="35%">
     <template #header="{ titleId, titleClass }">
       <span :id="titleId" :class="titleClass">
           <el-input v-click-outside="onClickOutside" @blur="onClickOutside" maxlength="30" v-model="flowNode!.name"

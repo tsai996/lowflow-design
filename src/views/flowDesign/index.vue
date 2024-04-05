@@ -20,7 +20,7 @@ const $props = defineProps<FlowDesignProps>()
 const $emits = defineEmits(['update:process', 'update:fields'])
 const {fields} = useVModels($props, $emits)
 const process = ref<FlowNode>($props.process)
-const { undo, redo, canUndo, canRedo} = useRefHistory(process, {deep: true, clone: cloneDeep })
+const {undo, redo, canUndo, canRedo} = useRefHistory(process, {deep: true, clone: cloneDeep})
 const nodePenalRef = ref<InstanceType<typeof NodePenal>>()
 const zoom = ref(100)
 const getScale = computed(() => zoom.value / 100)
@@ -79,6 +79,30 @@ const converterBpmn = () => {
   }
   downloadXml(processModel)
 }
+const downloadJson = () => {
+  const processModel = {
+    code: 'test',
+    name: '测试',
+    icon: {
+      name: 'el:HomeFilled',
+      color: '#409EFF',
+    },
+    process: process.value,
+    form: {
+      fields: fields.value
+    },
+    version: 1,
+    sort: 0,
+    groupId: '',
+    remark: '',
+  }
+  const blob = new Blob([JSON.stringify(processModel, null, 2)], {type: 'application/json'})
+  const a = document.createElement('a')
+  a.download = 'process.json'
+  a.href = URL.createObjectURL(blob)
+  a.click()
+  URL.revokeObjectURL(a.href)
+}
 // 按住shift键滚动鼠标滚轮，可以放大/缩小
 window.addEventListener('wheel', handleZoom)
 // 离开页面时，销毁事件监听
@@ -89,7 +113,7 @@ onUnmounted(() => {
 
 <template>
   <div class="designer-container">
-    <div class="dark">
+    <div class="tool">
       <el-switch
           inline-prompt
           :active-icon="Sunny"
@@ -105,6 +129,7 @@ onUnmounted(() => {
       <el-button @click="undo()" :disabled="!canUndo" :icon="TopLeft">撤销</el-button>
       <el-button @click="redo()" :disabled="!canRedo" :icon="TopRight">重做</el-button>
       <el-button @click="validate">校验</el-button>
+      <el-button @click="downloadJson" type="primary" :icon="Download">导出json</el-button>
       <el-button @click="converterBpmn" type="primary" :icon="Download">转bpmn</el-button>
     </div>
     <!--流程树-->
@@ -138,7 +163,7 @@ onUnmounted(() => {
     }
   }
 
-  .dark {
+  .tool {
     position: fixed;
     z-index: 999;
     top: 10px;
