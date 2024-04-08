@@ -69,9 +69,6 @@ const converterBpmn = () => {
       color: '#409EFF',
     },
     process: process.value,
-    form: {
-      fields: fields.value
-    },
     version: 1,
     sort: 0,
     groupId: '',

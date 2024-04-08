@@ -146,11 +146,12 @@ class RequestHttp {
 
     /**
      * 下载文件
-     * @param url 请求地址
-     * @param params 请求参数
+     * @param url
+     * @param data
+     * @param config
      */
-    download(url: string, params?: object): Promise<BlobPart> {
-        return this.service.post(url, params, {responseType: 'blob'})
+    download(url: string, data?: object, config = {}): Promise<BlobPart> {
+        return this.service.post(url, data, { ...config, responseType: 'blob' })
     }
 }
 
