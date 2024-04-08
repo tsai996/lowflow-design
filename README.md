@@ -9,7 +9,7 @@ lowflow-design是一个基于`Vue3`，`Vite`，`TypeScript`，`Element-Plus`等�
 ## 在线预览
 https://tsai996.github.io/lowflow-design/
 ### 成品案例
-http://125.124.181.149:8999/
+https://www.666cxf.com/
 #### 项目源码
 |     |   后端源码  |   前端源码  |
 |---  |--- | --- |
