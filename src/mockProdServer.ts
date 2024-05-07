@@ -1,9 +1,6 @@
-import { createProdMockServer } from "vite-plugin-mock/es/createProdMockServer";
-import index from "../mock";
-
-export const mockModules = [...index];
+import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer'
+import mock from './mock'
 
 export function setupProdMockServer() {
-    createProdMockServer(mockModules);
+  createProdMockServer(mock)
 }
-

@@ -1,10 +1,10 @@
-import http from '~/api/index'
+import http from '@/api/index'
 
 export interface User {
-    id: string,
-    username: string,
-    name: string,
-    avatar: string
+  id: string
+  username: string
+  name: string
+  avatar: string
 }
 
 /**
@@ -12,13 +12,13 @@ export interface User {
  * @param username
  */
 export const getByUsername = (username: string) => {
-    return http.get<User>(`/user/info`,{username:username})
+  return http.get<User>(`/user/info`, { username: username })
 }
 
 /**
  * 查询用户列表
  */
 export const getList = (userIds?: string[]) => {
-    const params = userIds ? {userIds: userIds} : {}
-    return http.post<User[]>('/user/list', params)
+  const params = userIds ? { userIds: userIds } : {}
+  return http.post<User[]>('/user/list', params)
 }
