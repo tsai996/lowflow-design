@@ -15,6 +15,7 @@ import {resolve} from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: '/lowflow-design',
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
