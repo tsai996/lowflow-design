@@ -64,6 +64,7 @@ const converterBpmn = () => {
   const processModel = {
     code: 'test',
     name: '测试',
+    enable: true,
     icon: {
       name: 'el:HomeFilled',
       color: '#409EFF',

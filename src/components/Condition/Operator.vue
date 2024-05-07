@@ -6,20 +6,20 @@ const $props = defineProps<{
 }>()
 const operatorOptions = [
   {
-    value: 'equal',
+    value: 'eq',
     label: '等于'
   },
   {
-    value: 'not_equal',
+    value: 'ne',
     label: '不等于'
   },
   {
     label: '包含',
-    value: 'contains'
+    value: 'lk'
   },
   {
     label: '不包含',
-    value: 'not_contain'
+    value: 'nl'
   }
 ]
 const $emits = defineEmits<{

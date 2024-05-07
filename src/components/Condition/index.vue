@@ -25,7 +25,7 @@ const addRule = () => {
   filterRules.value.conditions.push(
       {
         field: null,
-        operator: 'equal',
+        operator: 'eq',
         value: null
       }
   )
@@ -46,7 +46,7 @@ const handleDel = (index: number) => {
  */
 const addGroup = () => {
   filterRules.value.groups.push({
-    logicalOperator: 'and',
+    operator: 'and',
     conditions: [{
       field: null,
       operator: '',
@@ -69,7 +69,7 @@ const delGroup = (index: number) => {
     <div class="logical-operator">
       <div class="logical-operator__line"></div>
       <el-switch
-          v-model="filterRules.logicalOperator"
+          v-model="filterRules.operator"
           inline-prompt
           style="--el-switch-on-color: #409EFF; --el-switch-off-color: #67C23A"
           active-value="and"

@@ -81,7 +81,7 @@ const useNode = (node: Ref<FlowNode>, fields: Ref<Field[]>) => {
             def: false,
             name: `条件${exclusive.children.length + 1}`,
             conditions: {
-                logicalOperator: 'and',
+                operator: 'and',
                 conditions: [],
                 groups: []
             } as FilterRules,

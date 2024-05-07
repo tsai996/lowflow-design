@@ -14,7 +14,7 @@ export interface Condition {
  * 筛选规则
  */
 export interface FilterRules {
-    logicalOperator: 'or' | 'and',
+    operator: 'or' | 'and',
     conditions: Condition[]
     groups: FilterRules[]
 }
