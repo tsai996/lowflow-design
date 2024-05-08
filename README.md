@@ -6,7 +6,7 @@
 ## 介绍
 lowflow-design是一个基于`Vue3`，`Vite`，`TypeScript`，`Element-Plus`等技术栈开发的，适用于低代码或无代码开发平台的流程设计器。
 让普通人也能通过简单配置快速搭建流程。 <br />
-并提供了将json转xml的后端代码：[lowflow-design-converter](https://github.com/tsai996/lowflow-design-converter)。
+并提供了将json转xml的后端代码：[lowflow-design-converter](https://gitee.com/cai_xiao_feng/lowflow-design-converter)。
 ## 在线预览
 https://tsai996.github.io/lowflow-design/
 ### 成品案例
