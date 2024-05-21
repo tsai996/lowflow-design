@@ -14,11 +14,18 @@ import type { FilterRules } from '@/components/AdvancedFilter/type'
 import type { Field } from '@/components/Render/type'
 import { downloadXml } from '@/api/modules/model'
 
-const props = defineProps<{
-  process: FlowNode
-  fields: Field[]
-  readOnly?: boolean
-}>()
+const props = withDefaults(
+  defineProps<{
+    process: FlowNode
+    fields: Field[]
+    readOnly?: boolean
+    defaultZoom?: number
+  }>(),
+  {
+    readOnly: false,
+    defaultZoom: 100
+  }
+)
 
 const isDark = ref(false)
 const flatFields = computed(() => {
@@ -37,7 +44,7 @@ const flatFields = computed(() => {
   return all
 })
 const getScale = computed(() => zoom.value / 100)
-const zoom = ref(100)
+const zoom = ref(props.defaultZoom)
 const activeData = ref<FlowNode>({
   id: '',
   name: '',

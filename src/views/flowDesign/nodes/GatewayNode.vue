@@ -9,6 +9,9 @@ const $emits = defineEmits<{
 const props = defineProps<{
   node: BranchNode
 }>()
+const { readOnly } = inject<{
+  readOnly?: boolean
+}>('flowDesign', { readOnly: false })
 const addNode = (type: NodeType, node?: FlowNode) => {
   $emits('addNode', type, node || props.node)
 }
@@ -27,7 +30,7 @@ const moveLeft = (index: number) => {
 <template>
   <div class="gateway-node">
     <div class="add-branch">
-      <slot :addNode="addNode"></slot>
+      <slot :addNode="addNode" :readOnly="readOnly"></slot>
     </div>
     <div v-for="(item, index) in node.children" :key="item.id" class="col-box">
       <template v-if="index === 0">
@@ -43,14 +46,14 @@ const moveLeft = (index: number) => {
           <div
             class="move-left"
             @click.stop="moveLeft(index)"
-            v-show="index !== 0 && node.children.length !== index + 1"
+            v-show="index !== 0 && node.children.length !== index + 1 && !readOnly"
           >
             <svg-icon name="el:ArrowLeft" />
           </div>
           <div
             class="move-right"
             @click.stop="moveRight(index)"
-            v-show="![index + 1, index + 2].includes(node.children.length)"
+            v-show="![index + 1, index + 2].includes(node.children.length) && !readOnly"
           >
             <svg-icon name="el:ArrowRight" />
           </div>

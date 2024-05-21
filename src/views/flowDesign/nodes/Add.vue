@@ -2,6 +2,9 @@
 import type { PopoverInstance } from 'element-plus'
 import type { NodeType } from './type'
 
+const { readOnly } = inject<{
+  readOnly?: boolean
+}>('flowDesign', { readOnly: false })
 const popoverRef = ref<PopoverInstance>()
 const $emits = defineEmits<{
   (e: 'addNode', type: NodeType): void
@@ -52,7 +55,13 @@ const addTimerNode = () => {
         </div>
       </el-space>
       <template #reference>
-        <el-button icon="Plus" type="primary" style="z-index: 1" circle></el-button>
+        <el-button
+          v-show="!readOnly"
+          icon="Plus"
+          type="primary"
+          style="z-index: 1"
+          circle
+        ></el-button>
       </template>
     </el-popover>
   </div>

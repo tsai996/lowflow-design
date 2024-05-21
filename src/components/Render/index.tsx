@@ -16,11 +16,17 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   components: {
-    ElInput: defineAsyncComponent(() => import('element-plus/es').then(({ElInput}) => ElInput)),
-    ElInputNumber: defineAsyncComponent(() => import('element-plus/es').then(({ElInputNumber}) => ElInputNumber)),
-    ElSelect: defineAsyncComponent(() => import('element-plus/es').then(({ElSelect}) => ElSelect)),
-    ElRadio: defineAsyncComponent(() => import('element-plus/es').then(({ElRadio}) => ElRadio)),
-    ElCheckbox: defineAsyncComponent(() => import('element-plus/es').then(({ElCheckbox}) => ElCheckbox)),
+    ElInput: defineAsyncComponent(() => import('element-plus/es').then(({ ElInput }) => ElInput)),
+    ElInputNumber: defineAsyncComponent(() =>
+      import('element-plus/es').then(({ ElInputNumber }) => ElInputNumber)
+    ),
+    ElSelect: defineAsyncComponent(() =>
+      import('element-plus/es').then(({ ElSelect }) => ElSelect)
+    ),
+    ElRadio: defineAsyncComponent(() => import('element-plus/es').then(({ ElRadio }) => ElRadio)),
+    ElCheckbox: defineAsyncComponent(() =>
+      import('element-plus/es').then(({ ElCheckbox }) => ElCheckbox)
+    ),
     UserSelector: defineAsyncComponent(() => import('@/components/UserSelector/index.vue')),
     RoleSelector: defineAsyncComponent(() => import('@/components/RoleSelector/index.vue'))
   },
