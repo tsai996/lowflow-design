@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { PopoverInstance } from 'element-plus'
 import type { NodeType } from './type'
+import type { Ref } from 'vue'
 
 const { readOnly } = inject<{
-  readOnly?: boolean
-}>('flowDesign', { readOnly: false })
+  readOnly?: Ref<boolean>
+}>('flowDesign', { readOnly: ref(false) })
 const popoverRef = ref<PopoverInstance>()
 const $emits = defineEmits<{
   (e: 'addNode', type: NodeType): void
@@ -100,6 +101,7 @@ const addTimerNode = () => {
     &.Share {
       background-color: #45cf9b;
     }
+
     &.Timer {
       background-color: #e872b7;
     }

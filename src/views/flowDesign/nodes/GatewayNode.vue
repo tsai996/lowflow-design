@@ -2,6 +2,7 @@
 import TreeNode from './TreeNode.vue'
 import type { BranchNode, FlowNode, NodeType } from './type'
 import Add from './Add.vue'
+import type { Ref } from 'vue'
 
 const $emits = defineEmits<{
   (e: 'addNode', type: NodeType, node: FlowNode): void
@@ -10,8 +11,8 @@ const props = defineProps<{
   node: BranchNode
 }>()
 const { readOnly } = inject<{
-  readOnly?: boolean
-}>('flowDesign', { readOnly: false })
+  readOnly?: Ref<boolean>
+}>('flowDesign', { readOnly: ref(false) })
 const addNode = (type: NodeType, node?: FlowNode) => {
   $emits('addNode', type, node || props.node)
 }

@@ -12,7 +12,6 @@ import type {
 } from './nodes/type'
 import type { FilterRules } from '@/components/AdvancedFilter/type'
 import type { Field } from '@/components/Render/type'
-import { downloadXml } from '@/api/modules/model'
 
 const props = withDefaults(
   defineProps<{
@@ -27,7 +26,6 @@ const props = withDefaults(
   }
 )
 
-const isDark = ref(false)
 const flatFields = computed(() => {
   const all: Field[] = []
   const loop = (children: Field[]) => {
@@ -45,6 +43,7 @@ const flatFields = computed(() => {
 })
 const getScale = computed(() => zoom.value / 100)
 const zoom = ref(props.defaultZoom)
+const readOnly = computed(() => props.readOnly)
 const activeData = ref<FlowNode>({
   id: '',
   name: '',
@@ -53,17 +52,10 @@ const activeData = ref<FlowNode>({
 const penalVisible = ref(false)
 const nodesError = ref<Recordable<ErrorInfo[]>>({})
 provide('flowDesign', {
-  readOnly: props.readOnly || false,
+  readOnly: readOnly,
   fields: flatFields,
   nodesError: nodesError
 })
-const handleToggleDark = () => {
-  if (isDark.value) {
-    document.documentElement.classList.add('dark')
-  } else {
-    document.documentElement.classList.remove('dark')
-  }
-}
 const openPenal = (node: FlowNode) => {
   activeData.value = node
   penalVisible.value = true
@@ -284,23 +276,6 @@ const validate = () => {
     }
   })
 }
-const converterBpmn = () => {
-  const processModel = {
-    code: 'test',
-    name: '测试',
-    icon: {
-      name: 'el:HomeFilled',
-      color: '#409EFF'
-    },
-    process: props.process,
-    enable: true,
-    version: 1,
-    sort: 0,
-    groupId: '',
-    remark: ''
-  }
-  downloadXml(processModel)
-}
 defineExpose({
   validate
 })
@@ -309,13 +284,7 @@ defineExpose({
 <template>
   <div class="designer-container">
     <div class="tool">
-      <el-switch
-        inline-prompt
-        active-icon="Sunny"
-        inactive-icon="Moon"
-        @change="handleToggleDark"
-        v-model="isDark"
-      />
+      <slot></slot>
     </div>
     <!--放大/缩小-->
     <div class="zoom">
@@ -326,7 +295,6 @@ defineExpose({
       <el-tooltip content="缩小" placement="bottom-start">
         <el-button icon="minus" @click="zoom -= 10" circle :disabled="zoom <= 50"></el-button>
       </el-tooltip>
-      <el-button @click="converterBpmn" type="primary" icon="Download">转bpmn</el-button>
     </div>
     <!--流程树-->
     <div class="node-container">
@@ -361,8 +329,10 @@ defineExpose({
   .tool {
     position: fixed;
     z-index: 999;
-    top: 10px;
-    left: 20px;
+    top: 5px;
+    left: 5px;
+    display: flex;
+    gap: 5px;
   }
 
   .node-container {

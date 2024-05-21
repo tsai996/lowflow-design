@@ -5,9 +5,9 @@ import Add from './Add.vue'
 import type { Ref } from 'vue'
 
 const _inject = inject<{
-  readOnly?: boolean
+  readOnly?: Ref<boolean>
   nodesError: Ref<Recordable<ErrorInfo[]>>
-}>('flowDesign', { readOnly: false, nodesError: ref({}) })
+}>('flowDesign', { readOnly: ref(false), nodesError: ref({}) })
 const $emits = defineEmits<{
   (e: 'addNode', type: NodeType, node: FlowNode): void
   (e: 'delNode', node: FlowNode): void
@@ -27,7 +27,7 @@ const $props = withDefaults(
   }
 )
 const errorInfo = computed<ErrorInfo[] | undefined>(() => _inject.nodesError.value[$props.node.id])
-const _readOnly = computed(() => _inject.readOnly || $props.readOnly)
+const _readOnly = computed(() => _inject.readOnly?.value || $props.readOnly)
 const showInput = ref(false)
 const inputRef = ref<InputInstance>()
 const onShowInput = () => {
@@ -56,7 +56,10 @@ const delNode = () => {
 
 <template>
   <div class="node-box">
-    <el-card @click="activeNode" :class="['node', { 'error-node': errorInfo?.length }]">
+    <el-card
+      @click="activeNode"
+      :class="['node', { 'error-node': errorInfo?.length && !_readOnly }]"
+    >
       <!--头部-->
       <template #header>
         <div class="head">
@@ -108,7 +111,7 @@ const delNode = () => {
               {{ err.message }}
             </div>
           </template>
-          <el-icon class="warn-icon" :size="20" v-show="errorInfo?.length">
+          <el-icon class="warn-icon" :size="20" v-show="errorInfo?.length && !_readOnly">
             <WarnTriangleFilled @click.stop />
           </el-icon>
         </el-tooltip>
@@ -198,6 +201,7 @@ const delNode = () => {
         background-color: var(--el-card-bg-color);
       }
     }
+
     :deep(.el-card__body) {
       position: relative;
     }

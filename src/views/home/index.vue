@@ -2,6 +2,7 @@
 import FlowDesign from '@/views/flowDesign/index.vue'
 import type { Field } from '@/components/Render/type'
 import type { EndNode, FlowNode, StartNode } from '@/views/flowDesign/nodes/type'
+import { downloadXml } from '@/api/modules/model'
 
 // 流程节点
 const process = ref<FlowNode>({
@@ -27,7 +28,7 @@ const fields = ref<Field[]>([
     name: 'UserSelector',
     value: null,
     readonly: false,
-    required: false,
+    required: true,
     hidden: false,
     props: {
       multiple: false,
@@ -45,7 +46,7 @@ const fields = ref<Field[]>([
     name: 'ElInputNumber',
     value: null,
     readonly: false,
-    required: false,
+    required: true,
     hidden: false,
     props: {
       disabled: false,
@@ -66,7 +67,7 @@ const fields = ref<Field[]>([
     name: 'ElSelect',
     value: null,
     readonly: false,
-    required: false,
+    required: true,
     hidden: false,
     props: {
       disabled: false,
@@ -110,7 +111,7 @@ const fields = ref<Field[]>([
     name: 'ElInput',
     value: null,
     readonly: false,
-    required: false,
+    required: true,
     hidden: false,
     props: {
       type: 'textarea',
@@ -126,10 +127,78 @@ const fields = ref<Field[]>([
     }
   }
 ])
+// 是否只读
+const readOnly = ref(false)
+// 是否暗黑模式
+const isDark = ref(false)
+const converterBpmn = () => {
+  const processModel = {
+    code: 'test',
+    name: '测试',
+    icon: {
+      name: 'el:HomeFilled',
+      color: '#409EFF'
+    },
+    process: process.value,
+    enable: true,
+    version: 1,
+    sort: 0,
+    groupId: '',
+    remark: ''
+  }
+  downloadXml(processModel)
+}
+const handleToggleDark = () => {
+  if (isDark.value) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+}
+const gitee = () => {
+  window.open('https://gitee.com/cai_xiao_feng/lowflow-design')
+}
+const github = () => {
+  window.open('https://github.com/tsai996/lowflow-design')
+}
 </script>
 
 <template>
-  <FlowDesign :process="process" :fields="fields" />
+  <FlowDesign :process="process" :fields="fields" :readOnly="readOnly">
+    <el-switch
+      inline-prompt
+      active-text="正常模式"
+      inactive-text="暗黑模式"
+      @change="handleToggleDark"
+      v-model="isDark"
+    />
+    <el-switch
+      v-model="readOnly"
+      active-text="只读模式"
+      inactive-text="编辑模式"
+      inline-prompt
+      :active-value="true"
+      :inactive-value="false"
+    />
+    <el-button-group>
+      <el-button @click="converterBpmn" type="primary" icon="Download"> 转bpmn </el-button>
+      <!--开源地址-->
+      <el-dropdown>
+        <el-button type="primary">
+          开源地址
+          <el-icon class="el-icon--right">
+            <arrow-down />
+          </el-icon>
+        </el-button>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click.stop="gitee">Gitee</el-dropdown-item>
+            <el-dropdown-item @click.stop="github">Github</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </el-button-group>
+  </FlowDesign>
 </template>
 
 <style scoped lang="scss"></style>
