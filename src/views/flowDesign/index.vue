@@ -19,10 +19,12 @@ const props = withDefaults(
     fields: Field[]
     readOnly?: boolean
     defaultZoom?: number
+    bgColor?: string
   }>(),
   {
     readOnly: false,
-    defaultZoom: 100
+    defaultZoom: 100,
+    bgColor: 'var(--el-bg-color-page)'
   }
 )
 
@@ -307,13 +309,14 @@ defineExpose({
 
 <style scoped lang="scss">
 .designer-container {
+  --flow-bg-color: v-bind(bgColor);
   position: relative;
   display: flex;
   flex-direction: row;
   min-height: 100%;
   min-width: 100%;
   overflow: auto;
-  background-color: var(--el-bg-color-page);
+  background-color: var(--flow-bg-color);
 
   .zoom {
     position: fixed;

@@ -150,7 +150,7 @@ const delNode = () => {
     width: 0;
     border-width: 8px 6px 4px;
     border-color: var(--el-border-color) transparent transparent;
-    background-color: var(--el-bg-color-page);
+    background-color: var(--flow-bg-color);
   }
 
   .warn-icon {

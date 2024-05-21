@@ -86,7 +86,7 @@ const moveLeft = (index: number) => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--el-bg-color-page);
+    background-color: var(--flow-bg-color);
 
     &:before {
       content: '';
@@ -107,7 +107,7 @@ const moveLeft = (index: number) => {
       top: -3px;
       height: 3px;
       width: 50%;
-      background-color: var(--el-bg-color-page);
+      background-color: var(--flow-bg-color);
     }
 
     .bottom-left-border {
@@ -116,7 +116,7 @@ const moveLeft = (index: number) => {
       bottom: -3px;
       height: 3px;
       width: 50%;
-      background-color: var(--el-bg-color-page);
+      background-color: var(--flow-bg-color);
     }
 
     .top-right-border {
@@ -125,7 +125,7 @@ const moveLeft = (index: number) => {
       top: -3px;
       height: 3px;
       width: 50%;
-      background-color: var(--el-bg-color-page);
+      background-color: var(--flow-bg-color);
     }
 
     .bottom-right-border {
@@ -134,7 +134,7 @@ const moveLeft = (index: number) => {
       bottom: -3px;
       height: 3px;
       width: 50%;
-      background-color: var(--el-bg-color-page);
+      background-color: var(--flow-bg-color);
     }
   }
 }
