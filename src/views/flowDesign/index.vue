@@ -6,6 +6,7 @@ import type {
   ApprovalNode,
   BranchNode,
   CcNode,
+  NotifyNode,
   ConditionNode,
   ExclusiveNode,
   NodeType
@@ -167,6 +168,33 @@ const addTimer = (node: FlowNode) => {
     child.pid = id
   }
 }
+
+const addNotify = (node: FlowNode) => {
+  const child = node.child
+  const id = nextId()
+  node.child = {
+    id: id,
+    pid: node.id,
+    name: '消息通知',
+    type: 'notify',
+    child: child,
+    assigneeType: 'user',
+    formUser: '',
+    formRole: '',
+    users: [],
+    roles: [],
+    leader: 1,
+    orgLeader: 1,
+    choice: false,
+    self: false,
+    types: ['site'],
+    subject: '',
+    content: ''
+  } as NotifyNode
+  if (child) {
+    child.pid = id
+  }
+}
 const addApproval = (node: FlowNode) => {
   const child = node.child
   const id = nextId()
@@ -210,6 +238,7 @@ const addNode = (type: NodeType, node: FlowNode) => {
     condition: addCondition,
     cc: addCc,
     timer: addTimer,
+    notify: addNotify,
     approval: addApproval
   }
   const fun = addMap[type]

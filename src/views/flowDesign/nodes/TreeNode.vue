@@ -6,6 +6,7 @@ import End from './EndNode.vue'
 import Approval from './ApprovalNode.vue'
 import Cc from './CcNode.vue'
 import Timer from './TimerNode.vue'
+import Notify from './NotifyNode.vue'
 import Exclusive from './ExclusiveNode.vue'
 import Condition from './ConditionNode.vue'
 
@@ -17,6 +18,7 @@ const nodes: Recordable<Component> = {
   approval: Approval,
   cc: Cc,
   timer: Timer,
+  notify: Notify,
   exclusive: Exclusive,
   condition: Condition,
   end: End

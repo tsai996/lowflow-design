@@ -26,6 +26,10 @@ const addTimerNode = () => {
   $emits('addNode', 'timer')
   popoverRef.value?.hide()
 }
+const addNotifyNode = () => {
+  $emits('addNode', 'notify')
+  popoverRef.value?.hide()
+}
 </script>
 
 <template>
@@ -53,6 +57,10 @@ const addTimerNode = () => {
         <div class="node-select" @click="addTimerNode">
           <svg-icon name="el:Timer" />
           <el-text>计时等待</el-text>
+        </div>
+        <div class="node-select" @click="addNotifyNode">
+          <svg-icon name="el:BellFilled" />
+          <el-text>消息通知</el-text>
         </div>
       </el-space>
       <template #reference>
@@ -104,6 +112,10 @@ const addTimerNode = () => {
 
     &.Timer {
       background-color: #e872b7;
+    }
+
+    &.BellFilled {
+      background-color: #95d475;
     }
   }
 

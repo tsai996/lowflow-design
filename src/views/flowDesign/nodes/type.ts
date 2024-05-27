@@ -1,6 +1,14 @@
 import type { FilterRules } from '@/components/AdvancedFilter/type'
 
-export type NodeType = 'start' | 'approval' | 'cc' | 'exclusive' | 'timer' | 'condition' | 'end'
+export type NodeType =
+  | 'start'
+  | 'approval'
+  | 'cc'
+  | 'exclusive'
+  | 'timer'
+  | 'notify'
+  | 'condition'
+  | 'end'
 
 export interface FlowNode {
   id: string
@@ -48,6 +56,12 @@ export interface AssigneeNode extends FlowNode {
 
 export interface CcNode extends AssigneeNode {
   formProperties: FormProperty[]
+}
+
+export interface NotifyNode extends AssigneeNode {
+  types: ('site' | 'email' | 'sms' | 'wechat' | 'dingtalk' | 'feishu')[]
+  subject: string
+  content: string
 }
 
 export interface ApprovalNode extends AssigneeNode {

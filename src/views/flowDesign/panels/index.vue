@@ -5,6 +5,7 @@ import Start from './StartPanel.vue'
 import Approval from './ApprovalPanel.vue'
 import Cc from './CcPanel.vue'
 import Timer from './TimerPanel.vue'
+import Notify from './NotifyPanel.vue'
 import Condition from './ConditionPanel.vue'
 import type { FlowNode } from '../nodes/type'
 
@@ -17,6 +18,7 @@ const panels: Recordable<Component> = {
   approval: Approval,
   cc: Cc,
   timer: Timer,
+  notify: Notify,
   condition: Condition
 }
 const showInput = ref(false)

@@ -5,7 +5,7 @@ import type { Field } from '@/components/Render/type'
 defineProps<{
   activeData: AssigneeNode
   fields: Field[]
-  type: '审批' | '抄送' | '办理'
+  type: '审批' | '抄送' | '办理' | '通知'
 }>()
 </script>
 
