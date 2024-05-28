@@ -39,6 +39,7 @@ https://www.666cxf.com/
 | 抄送人  | ✅  | 支持单人、多人、角色、部门、发起人、上级领导、自定义抄送人、等等... |
 | 互斥分支 | ✅  | 支持或/且条件组，条件组组合                      |
 | 计时等待 | ✅  | 支持秒、分、时、天、周、月、自定义时间等待               |
+| 消息通知 | ✅  | 站内、邮件、企业微信、钉钉、飞书、短信、自定义通知内容         |
 
 ## 目录结构
 ~~~
@@ -89,6 +90,7 @@ https://www.666cxf.com/
 │   │   │   │   ├── GatewayNode.vue             # 网关节点
 │   │   │   │   ├── Node.vue                    # 节点
 │   │   │   │   ├── StartNode.vue               # 开始节点
+│   │   │   │   ├── NotifyNode.vue              # 消息通知节点
 │   │   │   │   ├── TimerNode.vue               # 计时等待节点
 │   │   │   │   ├── TreeNode.vue                # 节点树
 │   │   │   │   └── type.ts                     # 节点类型
@@ -98,6 +100,7 @@ https://www.666cxf.com/
 │   │   │   │   ├── ConditionPanel.vue          # 条件配置面板
 │   │   │   │   ├── index.vue                   # 属性面板抽屉
 │   │   │   │   ├── StartPanel.vue              # 开始配置面板
+│   │   │   │   ├── NotifyPanel.vue             # 消息通知配置面板
 │   │   │   │   └── TimerPanel.vue              # 计时等待配置面板
 │   │   ├── home                                # 首页
 │   │   └── ...
