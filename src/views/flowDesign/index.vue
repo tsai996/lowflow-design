@@ -215,6 +215,7 @@ const addApproval = (node: FlowNode) => {
     choice: false,
     self: false,
     multi: 'sequential',
+    multiPercent: 100,
     nobody: 'pass',
     nobodyUsers: [],
     formProperties: [],

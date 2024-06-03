@@ -69,6 +69,8 @@ export interface ApprovalNode extends AssigneeNode {
   multi: 'sequential' | 'joint' | 'single'
   // 审批人为空时处理方式：reject-拒绝，pass-通过，admin-管理员，assign-指定人员
   nobody: 'refuse' | 'pass' | 'admin' | 'assign'
+  // 多人审批通过比例
+  multiPercent: number
   // 审批人为空时,指定人员
   nobodyUsers: string[]
   // 表单字段
