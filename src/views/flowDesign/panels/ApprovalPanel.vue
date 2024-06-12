@@ -105,9 +105,9 @@ watchEffect(() => {
             <el-radio value="joint">会签（需要所有审批人都通过）</el-radio>
             <el-radio value="single">或签（其中一名审批人通过即可）</el-radio>
           </el-radio-group>
-          <div v-if="activeData.multi === 'joint'">
+          <el-text v-if="activeData.multi === 'joint'">
             需要 <el-input-number v-model="activeData.multiPercent" :min="1" :max="100" /> %人员通过
-          </div>
+          </el-text>
         </el-form-item>
         <el-form-item prop="nobody" label="审批人为空">
           <el-radio-group v-model="activeData.nobody" class="w-full">
