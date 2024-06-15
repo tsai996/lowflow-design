@@ -10,12 +10,14 @@ const process = ref<FlowNode>({
   pid: undefined,
   type: 'start',
   name: '发起人',
+  executionListeners: [],
   formProperties: [],
   child: {
     id: 'end',
     pid: 'root',
     type: 'end',
-    name: '结束',
+    name: '流程结束',
+    executionListeners: [],
     child: undefined
   } as EndNode
 } as StartNode)

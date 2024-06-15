@@ -15,7 +15,14 @@ export interface FlowNode {
   pid?: string
   name: string
   type: NodeType
+  executionListeners?: NodeListener[]
   child?: FlowNode
+}
+
+export interface NodeListener {
+  event: string
+  implementationType: 'class' | 'expression' | 'delegateExpression'
+  implementation: string
 }
 
 export interface StartNode extends FlowNode {
@@ -77,6 +84,8 @@ export interface ApprovalNode extends AssigneeNode {
   formProperties: FormProperty[]
   // 操作权限
   operations: OperationPermissions
+  // 任务监听器
+  taskListeners?: NodeListener[]
 }
 
 export interface TimerNode extends FlowNode {

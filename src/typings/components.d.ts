@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AdvancedFilter: typeof import('./../components/AdvancedFilter/index.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElBadge: typeof import('element-plus/es')['ElBadge']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
     ElCard: typeof import('element-plus/es')['ElCard']

@@ -203,6 +203,7 @@ const addApproval = (node: FlowNode) => {
     pid: node.id,
     type: 'approval',
     name: '审批人',
+    executionListeners: [],
     child: child,
     // 属性
     assigneeType: 'user',

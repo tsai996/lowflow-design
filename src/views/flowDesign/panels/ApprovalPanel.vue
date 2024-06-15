@@ -4,6 +4,7 @@ import type { Field } from '@/components/Render/type'
 import UserSelector from '@/components/UserSelector/index.vue'
 import AssigneePanel from './AssigneePanel.vue'
 import type { Ref } from 'vue'
+import TaskListeners from './TaskListeners.vue'
 
 const { fields } = inject<{ fields: Ref<Field[]>; admin: string[] }>('flowDesign', {
   fields: ref([]),
@@ -132,6 +133,9 @@ watchEffect(() => {
             v-model="activeData.nobodyUsers"
             placeholder="指定人员"
           />
+        </el-form-item>
+        <el-form-item prop="taskListeners" label="任务监听器">
+          <TaskListeners :node="activeData" />
         </el-form-item>
       </el-form>
     </el-tab-pane>
