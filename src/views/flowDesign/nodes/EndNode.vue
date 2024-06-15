@@ -48,11 +48,12 @@ const activeNode = () => {
   .end-node {
     position: relative;
     background: var(--el-border-color-lighter);
-    padding: 7px 24px;
+    padding: 7px 20px;
     border-radius: 24px;
     cursor: pointer;
     overflow: visible;
     z-index: 10;
+    box-shadow: var(--el-box-shadow-light);
 
     &:hover {
       box-shadow: 0 0 5px 0 var(--el-color-primary);
