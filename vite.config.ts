@@ -3,7 +3,6 @@ import {fileURLToPath, URL} from 'node:url'
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import VueDevTools from 'vite-plugin-vue-devtools'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -39,7 +38,6 @@ export default defineConfig({
         vue(),
         vueJsx(),
         Unocss(),
-        VueDevTools(),
         VueSetupExtend(),
         viteMockServe({
             mockPath: './src/mock',
