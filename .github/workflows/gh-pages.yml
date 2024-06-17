@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: 迁出代码
         # 使用action库  actions/checkout获取源码
-        uses: actions/checkout@v3 # 使用的工具
+        uses: actions/checkout@v4 # 使用的工具
       # 使用 pnpm
       - name: 使用 pnpm
         uses: pnpm/action-setup@v2
