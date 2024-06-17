@@ -348,6 +348,7 @@ defineExpose({
   min-width: 100%;
   overflow: auto;
   background-color: var(--flow-bg-color);
+  padding: 50px 0;
 
   .zoom {
     position: fixed;
