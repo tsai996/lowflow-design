@@ -116,7 +116,7 @@ https://www.666cxf.com/
 
 
 ## 扫码加入群聊，如果失效加微信拉入群聊（备注：加群）
-
+**求一份宁波内推岗位**
 <p>
     <img alt="QQ群" src="public/qq_qun.jpg" width="240" height="400" style="display: inline-block"/>
     <img alt="微信群" src="public/wx_qun.jpg" width="240" height="400" style="display: inline-block"/>
