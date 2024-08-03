@@ -13,6 +13,7 @@ import type {
 } from './nodes/type'
 import type { FilterRules } from '@/components/AdvancedFilter/type'
 import type { Field } from '@/components/Render/type'
+import { useDraggableScroll } from '@/hooks/useDraggableScroll'
 
 const props = withDefaults(
   defineProps<{
@@ -54,6 +55,9 @@ const activeData = ref<FlowNode>({
 })
 const penalVisible = ref(false)
 const nodesError = ref<Recordable<ErrorInfo[]>>({})
+
+const designerContainerRef = ref<HTMLElement | null>(null)
+useDraggableScroll(designerContainerRef);
 provide('flowDesign', {
   readOnly: readOnly,
   fields: flatFields,
@@ -315,7 +319,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="designer-container">
+  <div class="designer-container cursor-default active:cursor-grabbing" ref="designerContainerRef">
     <div class="tool">
       <slot></slot>
     </div>
@@ -330,7 +334,7 @@ defineExpose({
       </el-tooltip>
     </div>
     <!--流程树-->
-    <div class="node-container">
+    <div class="node-container" >
       <TreeNode :node="process" @addNode="addNode" @delNode="delNode" @activeNode="openPenal" />
     </div>
     <!--属性面板-->
@@ -344,8 +348,8 @@ defineExpose({
   position: relative;
   display: flex;
   flex-direction: row;
-  min-height: 100%;
-  min-width: 100%;
+  height: 100%;
+  width: 100%;
   overflow: auto;
   background-color: var(--flow-bg-color);
 
@@ -376,7 +380,6 @@ defineExpose({
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 50px;
   }
 }
 </style>

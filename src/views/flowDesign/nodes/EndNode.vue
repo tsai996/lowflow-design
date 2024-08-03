@@ -36,6 +36,7 @@ const activeNode = () => {
 <style scoped lang="scss">
 .node-box {
   position: relative;
+  padding-bottom: 50px;
 
   .end-node-circle {
     width: 10px;

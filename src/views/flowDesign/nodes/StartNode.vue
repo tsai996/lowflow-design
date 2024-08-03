@@ -35,6 +35,7 @@ watchEffect(() => {
 
 <style scoped lang="scss">
 .start-node {
+  padding-top: 50px;
   :deep(.node-box) {
     &:after {
       display: none;
