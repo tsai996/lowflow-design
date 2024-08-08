@@ -115,14 +115,13 @@ https://www.666cxf.com/
 ~~~
 
 
-## 扫码加入群聊，如果失效加微信拉入群聊（备注：加群）
-**求一份宁波内推岗位**
+## 添加微信好友拉入群聊（备注：加群）
 <p>
+    <img alt="微信" src="public/wx.jpg" width="240" height="400" style="display: inline-block"/>
     <img alt="QQ群" src="public/qq_qun.jpg" width="240" height="400" style="display: inline-block"/>
-    <img alt="微信群" src="public/wx_qun.jpg" width="240" height="400" style="display: inline-block"/>
-    <img alt="微信" src="public/wx.jpg" width="240" style="display: inline-block"/>
 </p>
 
+**求一份内推岗位**
 ## 赞助
 
 开源不易如果该项目对您有帮助，您可以请我喝杯奶茶。
