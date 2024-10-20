@@ -57,7 +57,7 @@ const penalVisible = ref(false)
 const nodesError = ref<Recordable<ErrorInfo[]>>({})
 
 const designerContainerRef = ref<HTMLElement | null>(null)
-useDraggableScroll(designerContainerRef);
+useDraggableScroll(designerContainerRef)
 provide('flowDesign', {
   readOnly: readOnly,
   fields: flatFields,
@@ -334,7 +334,7 @@ defineExpose({
       </el-tooltip>
     </div>
     <!--流程树-->
-    <div class="node-container" >
+    <div class="node-container">
       <TreeNode :node="process" @addNode="addNode" @delNode="delNode" @activeNode="openPenal" />
     </div>
     <!--属性面板-->

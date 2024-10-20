@@ -56,12 +56,9 @@ const delNode = () => {
 
 <template>
   <div class="node-box">
-    <el-card
-      @click="activeNode"
-      :class="['node', { 'error-node': errorInfo?.length && !_readOnly }]"
-    >
+    <div @click="activeNode" :class="['node', { 'error-node': errorInfo?.length && !_readOnly }]">
       <!--头部-->
-      <template #header>
+      <div class="node-header">
         <div class="head">
           <div @click.stop v-if="showInput">
             <el-input
@@ -115,10 +112,12 @@ const delNode = () => {
             <WarnTriangleFilled @click.stop />
           </el-icon>
         </el-tooltip>
-      </template>
+      </div>
       <!--插槽内容-->
-      <slot></slot>
-    </el-card>
+      <div class="node-content">
+        <slot></slot>
+      </div>
+    </div>
     <Add @add-node="addNode" />
   </div>
 </template>
@@ -162,10 +161,6 @@ const delNode = () => {
     color: var(--el-color-error);
   }
 
-  .error-node {
-    box-shadow: 0 0 5px 0 var(--el-color-error-light-3);
-  }
-
   .node {
     border-radius: 7px;
     cursor: pointer;
@@ -174,13 +169,10 @@ const delNode = () => {
     min-height: 90px;
     width: 230px;
     z-index: 10;
-
-    .node-close {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      display: none;
-    }
+    color: var(--el-text-color-primary);
+    border: 1px solid var(--el-border-color-light);
+    background-color: var(--el-bg-color-overlay);
+    box-shadow: var(--el-box-shadow-light);
 
     &:hover {
       &:not(.error-node) {
@@ -192,24 +184,38 @@ const delNode = () => {
       }
     }
 
-    :deep(.el-card__header) {
-      padding: calc(var(--el-card-padding) - 18px) calc(var(--el-card-padding) - 13px);
+    &.error-node {
+      box-shadow: 0 0 5px 0 var(--el-color-error-light-3);
+    }
+
+    .node-header {
+      padding: 2px 7px;
       border-radius: 7px 7px 0 0;
       background: v-bind(color);
+      box-sizing: border-box;
+      border-bottom: 1px solid var(--el-border-color-light);
 
-      .el-input__wrapper {
-        background-color: var(--el-card-bg-color);
+      .head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        :deep(.el-input__wrapper) {
+          background-color: var(--el-bg-color-overlay);
+        }
+      }
+
+      .node-close {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        display: none;
       }
     }
 
-    :deep(.el-card__body) {
+    .node-content {
       position: relative;
-    }
-
-    .head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 20px;
     }
   }
 }
