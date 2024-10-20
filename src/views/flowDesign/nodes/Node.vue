@@ -59,26 +59,6 @@ const delNode = () => {
     <div @click="activeNode" :class="['node', { 'error-node': errorInfo?.length && !_readOnly }]">
       <!--头部-->
       <div class="node-header">
-        <div class="head">
-          <div @click.stop v-if="showInput">
-            <el-input
-              ref="inputRef"
-              v-click-outside="onClickOutside"
-              @blur="onClickOutside"
-              maxlength="30"
-              v-model="node.name"
-            />
-          </div>
-          <el-text tag="b" truncated v-else @click.stop="onShowInput">
-            {{ node.name }}
-            <el-icon>
-              <EditPen />
-            </el-icon>
-          </el-text>
-          <slot name="icon">
-            <svg-icon :size="30" color="node-icon" v-if="icon" :name="icon" />
-          </slot>
-        </div>
         <!--删除按钮-->
         <span @click.stop>
           <el-popconfirm
@@ -101,6 +81,26 @@ const delNode = () => {
             </template>
           </el-popconfirm>
         </span>
+        <div class="head">
+          <div @click.stop v-if="showInput">
+            <el-input
+              ref="inputRef"
+              v-click-outside="onClickOutside"
+              @blur="onClickOutside"
+              maxlength="30"
+              v-model="node.name"
+            />
+          </div>
+          <el-text tag="b" truncated v-else @click.stop="onShowInput">
+            {{ node.name }}
+            <el-icon>
+              <EditPen />
+            </el-icon>
+          </el-text>
+          <slot name="icon">
+            <svg-icon :size="30" color="node-icon" v-if="icon" :name="icon" />
+          </slot>
+        </div>
         <!--错误提示-->
         <el-tooltip placement="top-start">
           <template #content>
@@ -165,7 +165,7 @@ const delNode = () => {
     border-radius: 7px;
     cursor: pointer;
     position: relative;
-    overflow: visible;
+    // overflow: visible;
     min-height: 90px;
     width: 230px;
     z-index: 10;
@@ -173,16 +173,6 @@ const delNode = () => {
     border: 1px solid var(--el-border-color-light);
     background-color: var(--el-bg-color-overlay);
     box-shadow: var(--el-box-shadow-light);
-
-    &:hover {
-      &:not(.error-node) {
-        box-shadow: 0 0 5px 0 var(--el-color-primary);
-      }
-
-      .node-close {
-        display: block;
-      }
-    }
 
     &.error-node {
       box-shadow: 0 0 5px 0 var(--el-color-error-light-3);
@@ -209,6 +199,7 @@ const delNode = () => {
         position: absolute;
         top: -10px;
         right: -10px;
+        z-index: 10;
         display: none;
       }
     }
@@ -216,6 +207,16 @@ const delNode = () => {
     .node-content {
       position: relative;
       padding: 20px;
+    }
+
+    &:hover {
+      &:not(.error-node) {
+        box-shadow: 0 0 5px 0 var(--el-color-primary);
+      }
+
+      .node-close {
+        display: block;
+      }
     }
   }
 }
