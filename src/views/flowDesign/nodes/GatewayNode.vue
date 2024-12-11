@@ -17,14 +17,14 @@ const addNode = (type: NodeType, node?: FlowNode) => {
   $emits('addNode', type, node || props.node)
 }
 const moveRight = (index: number) => {
-  const node = props.node.children[index]
-  props.node.children.splice(index, 1)
-  props.node.children.splice(index + 1, 0, node)
+  const node = props.node.branches[index]
+  props.node.branches.splice(index, 1)
+  props.node.branches.splice(index + 1, 0, node)
 }
 const moveLeft = (index: number) => {
-  const node = props.node.children[index]
-  props.node.children.splice(index, 1)
-  props.node.children.splice(index - 1, 0, node)
+  const node = props.node.branches[index]
+  props.node.branches.splice(index, 1)
+  props.node.branches.splice(index - 1, 0, node)
 }
 </script>
 
@@ -33,12 +33,12 @@ const moveLeft = (index: number) => {
     <div class="add-branch">
       <slot :addNode="addNode" :readOnly="readOnly"></slot>
     </div>
-    <div v-for="(item, index) in node.children" :key="item.id" class="col-box">
+    <div v-for="(item, index) in node.branches" :key="item.id" class="col-box">
       <template v-if="index === 0">
         <div class="top-left-border"></div>
         <div class="bottom-left-border" />
       </template>
-      <template v-else-if="node.children.length === index + 1">
+      <template v-else-if="node.branches.length === index + 1">
         <div class="top-right-border"></div>
         <div class="bottom-right-border" />
       </template>
@@ -47,14 +47,14 @@ const moveLeft = (index: number) => {
           <div
             class="move-left"
             @click.stop="moveLeft(index)"
-            v-show="index !== 0 && node.children.length !== index + 1 && !readOnly"
+            v-show="index !== 0 && node.branches.length !== index + 1 && !readOnly"
           >
             <svg-icon name="el:ArrowLeft" />
           </div>
           <div
             class="move-right"
             @click.stop="moveRight(index)"
-            v-show="![index + 1, index + 2].includes(node.children.length) && !readOnly"
+            v-show="![index + 1, index + 2].includes(node.branches.length) && !readOnly"
           >
             <svg-icon name="el:ArrowRight" />
           </div>

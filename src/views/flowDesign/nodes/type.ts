@@ -7,6 +7,7 @@ export type NodeType =
   | 'exclusive'
   | 'timer'
   | 'notify'
+  | 'service'
   | 'condition'
   | 'end'
 
@@ -16,7 +17,7 @@ export interface FlowNode {
   name: string
   type: NodeType
   executionListeners?: NodeListener[]
-  child?: FlowNode
+  next?: FlowNode
 }
 
 export interface NodeListener {
@@ -88,6 +89,11 @@ export interface ApprovalNode extends AssigneeNode {
   taskListeners?: NodeListener[]
 }
 
+export interface ServiceNode extends FlowNode {
+  implementationType: string
+  implementation: string
+}
+
 export interface TimerNode extends FlowNode {
   waitType: 'duration' | 'date'
   unit: 'PT%sS' | 'PT%sM' | 'PT%sH' | 'P%sD' | 'P%sW' | 'P%sM'
@@ -101,11 +107,11 @@ export interface ConditionNode extends FlowNode {
 }
 
 export interface BranchNode extends FlowNode {
-  children: FlowNode[]
+  branches: FlowNode[]
 }
 
 export interface ExclusiveNode extends BranchNode {
-  children: ConditionNode[]
+  branches: ConditionNode[]
 }
 
 export interface ErrorInfo {

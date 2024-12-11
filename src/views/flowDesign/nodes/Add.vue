@@ -30,6 +30,10 @@ const addNotifyNode = () => {
   $emits('addNode', 'notify')
   popoverRef.value?.hide()
 }
+const addServiceNode = () => {
+  $emits('addNode', 'service')
+  popoverRef.value?.hide()
+}
 </script>
 
 <template>
@@ -61,6 +65,10 @@ const addNotifyNode = () => {
         <div class="node-select" @click="addNotifyNode">
           <svg-icon name="el:BellFilled" />
           <el-text>消息通知</el-text>
+        </div>
+        <div class="node-select" @click="addServiceNode">
+          <svg-icon name="el:Tools" />
+          <el-text>服务节点</el-text>
         </div>
       </el-space>
       <template #reference>
@@ -116,6 +124,10 @@ const addNotifyNode = () => {
 
     &.BellFilled {
       background-color: #95d475;
+    }
+
+    &.Tools {
+      background-color: #ffc107;
     }
   }
 

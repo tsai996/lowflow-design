@@ -7,6 +7,7 @@ import Approval from './ApprovalNode.vue'
 import Cc from './CcNode.vue'
 import Timer from './TimerNode.vue'
 import Notify from './NotifyNode.vue'
+import Service from './ServiceNode.vue'
 import Exclusive from './ExclusiveNode.vue'
 import Condition from './ConditionNode.vue'
 
@@ -19,6 +20,7 @@ const nodes: Recordable<Component> = {
   cc: Cc,
   timer: Timer,
   notify: Notify,
+  service: Service,
   exclusive: Exclusive,
   condition: Condition,
   end: End
@@ -32,7 +34,7 @@ const nodes: Recordable<Component> = {
       <slot :name="name" v-bind="scope || {}"></slot>
     </template>
   </component>
-  <TreeNode v-if="node.child" :node="node.child" v-bind="$attrs" />
+  <TreeNode v-if="node.next" :node="node.next" v-bind="$attrs" />
 </template>
 
 <style scoped lang="scss"></style>

@@ -13,13 +13,13 @@ const { nodesError } = inject<{
 const content = ref<string>('')
 watchEffect(() => {
   const errors: ErrorInfo[] = []
-  const { id, name, def, conditions, child } = props.node
+  const { id, name, def, conditions, next } = props.node
   if (def) {
     content.value = '不满足其他条件，进入此分支'
   } else if (conditions.conditions.length > 0 || (conditions.groups?.length || 0) > 0) {
     const count = conditions.conditions.length + (conditions.groups?.length || 0)
     content.value = `已设置（${count}）个条件`
-    if (!child) {
+    if (!next) {
       errors.push({ id: id, name: name, message: '分支下节点为空' })
     }
   } else {

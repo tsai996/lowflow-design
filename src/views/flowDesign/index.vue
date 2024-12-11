@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TreeNode from './nodes/TreeNode.vue'
 import Panel from './panels/index.vue'
-import type { ErrorInfo, FlowNode, TimerNode } from './nodes/type'
+import type { ErrorInfo, FlowNode, ServiceNode, TimerNode } from './nodes/type'
 import type {
   ApprovalNode,
   BranchNode,
@@ -73,13 +73,13 @@ const nextId = (): string => {
     if (node.id === id) {
       return true
     }
-    if (node.child) {
-      return findId(node.child, id)
+    if (node.next) {
+      return findId(node.next, id)
     }
-    if ('children' in node) {
+    if ('branches' in node) {
       const branchNode = node as BranchNode
-      if (branchNode.children && branchNode.children.length > 0) {
-        return branchNode.children.some((item) => {
+      if (branchNode.branches && branchNode.branches.length > 0) {
+        return branchNode.branches.some((item) => {
           return findId(item, id)
         })
       }
@@ -92,53 +92,53 @@ const nextId = (): string => {
   return id
 }
 const addExclusive = (node: FlowNode) => {
-  const child = node.child
+  const next = node.next
   const id = nextId()
   const exclusiveNode = {
     id: id,
     pid: node.id,
     type: 'exclusive',
     name: '独占网关',
-    child: child,
-    children: []
+    next: next,
+    branches: []
   } as ExclusiveNode
-  if (child) {
-    child.pid = id
+  if (next) {
+    next.pid = id
   }
   addCondition(exclusiveNode)
   addCondition(exclusiveNode)
-  node.child = exclusiveNode
-  if (exclusiveNode.children.length > 0) {
-    const condition = exclusiveNode.children[exclusiveNode.children.length - 1] as ConditionNode
+  node.next = exclusiveNode
+  if (exclusiveNode.branches.length > 0) {
+    const condition = exclusiveNode.branches[exclusiveNode.branches.length - 1] as ConditionNode
     condition.def = true
     condition.name = '默认条件'
   }
 }
 const addCondition = (node: FlowNode) => {
   const exclusive = node as ExclusiveNode
-  exclusive.children.splice(exclusive.children.length - 1, 0, {
+  exclusive.branches.splice(exclusive.branches.length - 1, 0, {
     id: nextId(),
     pid: exclusive.id,
     type: 'condition',
     def: false,
-    name: `条件${exclusive.children.length + 1}`,
+    name: `条件${exclusive.branches.length + 1}`,
     conditions: {
       operator: 'and',
       conditions: [],
       groups: []
     } as FilterRules,
-    child: undefined
+    next: undefined
   })
 }
 const addCc = (node: FlowNode) => {
-  const child = node.child
+  const next = node.next
   const id = nextId()
-  node.child = {
+  node.next = {
     id: id,
     pid: node.id,
     type: 'cc',
     name: '抄送人',
-    child: child,
+    next: next,
     assigneeType: 'user',
     formUser: '',
     formRole: '',
@@ -150,38 +150,38 @@ const addCc = (node: FlowNode) => {
     self: false,
     formProperties: []
   } as CcNode
-  if (child) {
-    child.pid = id
+  if (next) {
+    next.pid = id
   }
 }
 const addTimer = (node: FlowNode) => {
-  const child = node.child
+  const next = node.next
   const id = nextId()
-  node.child = {
+  node.next = {
     id: id,
     pid: node.id,
     name: '计时等待',
     type: 'timer',
-    child: child,
+    next: next,
     waitType: 'duration',
     unit: 'PT%sS',
     duration: 0,
     timeDate: undefined
   } as TimerNode
-  if (child) {
-    child.pid = id
+  if (next) {
+    next.pid = id
   }
 }
 
 const addNotify = (node: FlowNode) => {
-  const child = node.child
+  const next = node.next
   const id = nextId()
-  node.child = {
+  node.next = {
     id: id,
     pid: node.id,
     name: '消息通知',
     type: 'notify',
-    child: child,
+    next: next,
     assigneeType: 'user',
     formUser: '',
     formRole: '',
@@ -195,20 +195,36 @@ const addNotify = (node: FlowNode) => {
     subject: '',
     content: ''
   } as NotifyNode
-  if (child) {
-    child.pid = id
+  if (next) {
+    next.pid = id
+  }
+}
+const addService = (node: FlowNode) => {
+  const next = node.next
+  const id = nextId()
+  node.next = {
+    id: id,
+    pid: node.id,
+    type: 'service',
+    name: '服务节点',
+    next: next,
+    implementationType: '',
+    implementation: '',
+  } as ServiceNode
+  if (next) {
+    next.pid = id
   }
 }
 const addApproval = (node: FlowNode) => {
-  const child = node.child
+  const next = node.next
   const id = nextId()
-  node.child = {
+  node.next = {
     id: id,
     pid: node.id,
     type: 'approval',
     name: '审批人',
     executionListeners: [],
-    child: child,
+    next: next,
     // 属性
     assigneeType: 'user',
     formUser: '',
@@ -234,8 +250,8 @@ const addApproval = (node: FlowNode) => {
       minusMulti: false
     }
   } as ApprovalNode
-  if (child) {
-    child.pid = id
+  if (next) {
+    next.pid = id
   }
 }
 const addNode = (type: NodeType, node: FlowNode) => {
@@ -245,6 +261,7 @@ const addNode = (type: NodeType, node: FlowNode) => {
     cc: addCc,
     timer: addTimer,
     notify: addNotify,
+    service: addService,
     approval: addApproval
   }
   const fun = addMap[type]
@@ -257,32 +274,32 @@ const delNode = (del: FlowNode) => {
 const delNodeNext = (next: FlowNode, del: FlowNode) => {
   delete nodesError.value[del.id]
   if (next.id === del.pid) {
-    if ('children' in next && next.child?.id !== del.id) {
+    if ('branches' in next && next.next?.id !== del.id) {
       const branchNode = next as BranchNode
-      const index = branchNode.children.findIndex((item) => item.id === del.id)
+      const index = branchNode.branches.findIndex((item) => item.id === del.id)
       if (index !== -1) {
-        if (branchNode.children.length <= 2) {
+        if (branchNode.branches.length <= 2) {
           delError(branchNode)
           delNode(branchNode)
         } else {
           delError(del)
-          branchNode.children.splice(index, 1)
+          branchNode.branches.splice(index, 1)
         }
       }
     } else {
-      if (del.child && del.child.pid) {
-        del.child.pid = next.id
+      if (del.next && del.next.pid) {
+        del.next.pid = next.id
       }
-      next.child = del.child
+      next.next = del.next
     }
   } else {
-    if (next.child) {
-      delNodeNext(next.child, del)
+    if (next.next) {
+      delNodeNext(next.next, del)
     }
-    if ('children' in next) {
+    if ('branches' in next) {
       const nextBranch = next as BranchNode
-      if (nextBranch.children && nextBranch.children.length > 0) {
-        nextBranch.children.forEach((item) => {
+      if (nextBranch.branches && nextBranch.branches.length > 0) {
+        nextBranch.branches.forEach((item) => {
           delNodeNext(item, del)
         })
       }
@@ -291,13 +308,13 @@ const delNodeNext = (next: FlowNode, del: FlowNode) => {
 }
 const delError = (node: FlowNode) => {
   delete nodesError.value[node.id]
-  if (node.child) {
-    delError(node.child)
+  if (node.next) {
+    delError(node.next)
   }
-  if ('children' in node) {
+  if ('branches' in node) {
     const branchNode = node as BranchNode
-    if (branchNode.children && branchNode.children.length > 0) {
-      branchNode.children.forEach((item) => {
+    if (branchNode.branches && branchNode.branches.length > 0) {
+      branchNode.branches.forEach((item) => {
         delError(item)
       })
     }

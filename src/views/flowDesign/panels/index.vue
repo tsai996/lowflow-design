@@ -6,6 +6,7 @@ import Approval from './ApprovalPanel.vue'
 import Cc from './CcPanel.vue'
 import Timer from './TimerPanel.vue'
 import Notify from './NotifyPanel.vue'
+import Service from './ServicePanel.vue'
 import Condition from './ConditionPanel.vue'
 import End from './EndPanel.vue'
 import type { FlowNode } from '../nodes/type'
@@ -20,6 +21,7 @@ const panels: Recordable<Component> = {
   cc: Cc,
   timer: Timer,
   notify: Notify,
+  service: Service,
   condition: Condition,
   end: End
 }

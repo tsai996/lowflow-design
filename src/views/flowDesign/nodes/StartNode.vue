@@ -12,8 +12,8 @@ const { nodesError } = inject<{
 }>('flowDesign', { nodesError: ref({}) })
 watchEffect(() => {
   const errors: ErrorInfo[] = []
-  const { id, name, child } = props.node
-  if (child?.type === 'end') {
+  const { id, name, next } = props.node
+  if (next?.type === 'end') {
     errors.push({ id: id, name: name, message: '发起下节点为空' })
   }
   // 记录错误

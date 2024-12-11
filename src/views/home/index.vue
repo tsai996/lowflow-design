@@ -12,13 +12,13 @@ const process = ref<FlowNode>({
   name: '发起人',
   executionListeners: [],
   formProperties: [],
-  child: {
+  next: {
     id: 'end',
     pid: 'root',
     type: 'end',
     name: '流程结束',
     executionListeners: [],
-    child: undefined
+    next: undefined
   } as EndNode
 } as StartNode)
 // 表单字段
