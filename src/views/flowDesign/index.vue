@@ -209,7 +209,7 @@ const addService = (node: FlowNode) => {
     name: '服务节点',
     next: next,
     implementationType: '',
-    implementation: '',
+    implementation: ''
   } as ServiceNode
   if (next) {
     next.pid = id
