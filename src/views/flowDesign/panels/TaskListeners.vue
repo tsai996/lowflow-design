@@ -27,7 +27,7 @@ const delListener = (index: number) => {
         <el-button icon="Setting" @click="drawer = true"> 配置</el-button>
       </el-badge>
     </slot>
-    <el-drawer v-model="drawer" title="任务监听器">
+    <el-drawer v-model="drawer" :lock-scroll="false" title="任务监听器">
       <div class="flex-col">
         <el-button @click="addListener" type="primary" icon="Plus">添加监听器</el-button>
         <div v-for="(item, index) in node.taskListeners" :key="index" class="listener-box">

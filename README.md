@@ -1,137 +1,126 @@
 <div align="center">
-    <h1>lowflow-design</h1>
-    <p>低代码流程设计器</p>
+  <h1>lowflow-design</h1>
+  <p>低代码流程设计器</p>
+  <p>
+    <a href="./README.md">中文</a> | <a href="./README.en.md">English</a>
+  </p>
 </div>
 
-## 介绍
+## 项目简介
+`lowflow-design` 是一个基于 `Vue 3`、`Vite`、`TypeScript`、`Element Plus` 的流程设计器，适用于低代码/无代码平台中的流程配置场景。
 
-lowflow-design是一个基于`Vue3`，`Vite`，`TypeScript`，`Element-Plus`等技术栈开发的，适用于低代码或无代码开发平台的流程设计器。
-让普通人也能通过简单配置快速搭建流程。 <br />
-并提供了将json转xml的后端代码：[lowflow-design-converter](https://gitee.com/cai_xiao_feng/lowflow-design-converter)。
+项目支持通过可视化方式快速搭建流程，并可配合后端转换项目将流程 JSON 转换为 BPMN XML：
+- 后端转换器：[GitHub](https://github.com/tsai996/lowflow-design-converter) | [Gitee](https://gitee.com/cai_xiao_feng/lowflow-design-converter)
+- 传统 `bpmn-js` 流程设计器：[GitHub](https://github.com/tsai996/vue-bpmn-designer) | [Gitee](https://gitee.com/cai_xiao_feng/vue-bpmn-designer)
 
-## 在线预览
+## 在线体验
+- 预览地址：<https://tsai996.github.io/lowflow-design/>
+- 成品示例：<https://demo.lowflow.vip/>
 
-https://tsai996.github.io/lowflow-design/
-
-#### 成品案例
-
-https://demo.lowflow.vip/
-
-#### 项目源码
-
-|        | 后端源码                                                     | 前端源码                                           |
-|--------|----------------------------------------------------------|------------------------------------------------|
-| github | https://github.com/tsai996/lowflow-design-converter      | https://github.com/tsai996/lowflow-design      |
-| 码云     | https://gitee.com/cai_xiao_feng/lowflow-design-converter | https://gitee.com/cai_xiao_feng/lowflow-design |
-
-#### 示例图
-
+## 效果预览
 <p>
-    <img alt="节点项" src="public/flow.png" style="display: inline-block"/>
-    <img alt="属性面板" src="public/penal.png" style="display: inline-block"/>
+  <img alt="流程设计器" src="public/flow.png" style="display: inline-block"/>
+  <img alt="属性面板" src="public/penal.png" style="display: inline-block"/>
 </p>
 
-## 特性
+## 功能特性
+- 审批节点：支持单人、多人、角色、部门、发起人、上级领导、自定义审批人等。
+- 抄送节点：支持单人、多人、角色、部门、发起人、上级领导、自定义抄送人等。
+- 条件分支：支持条件组及组合逻辑。
+- 计时等待：支持秒、分、时、天、周、月及自定义时长。
+- 消息通知：支持站内信、邮件、企业微信、钉钉、飞书、短信等通知方式。
 
-| 节点   | 状态 | 描述                                  |
-|------|----|-------------------------------------|
-| 审批人  | ✅  | 支持单人、多人、角色、部门、发起人、上级领导、自定义审批人、等等... |
-| 抄送人  | ✅  | 支持单人、多人、角色、部门、发起人、上级领导、自定义抄送人、等等... |
-| 互斥分支 | ✅  | 支持或/且条件组，条件组组合                      |
-| 计时等待 | ✅  | 支持秒、分、时、天、周、月、自定义时间等待               |
-| 消息通知 | ✅  | 站内、邮件、企业微信、钉钉、飞书、短信、自定义通知内容         |
+## 技术栈
+- Vue 3
+- TypeScript
+- Vite
+- Element Plus
+- Pinia
+- Vue Router
+- UnoCSS
 
-## 目录结构
-~~~
-├── public
-├── src
-│   ├── api                                     # 接口
-│   │   ├── index.ts                            # 接口统一管理
-│   │   ├── modules                             # 接口模块
-│   │   │   ├── role.ts                         # 角色接口
-│   │   │   ├── user.ts                         # 用户接口
-│   │   │   └── model.ts                        # 流程模型接口
-│   ├── assets                                  # 静态资源
-│   │   ├── logo.png
-│   │   └── ...
-│   ├── components                              # 公共组件
-│   │   ├── AdvancedFilter                      # 高级条件筛选
-│   │   ├── Render                              # 组件渲染器
-│   │   ├── RoleSelector                        # 角色选择器
-│   │   ├── SvgIcon                             # svg图标
-│   │   ├── UserSelector                        # 用户选择器
-│   │   └── ...
-│   ├── mock                                    # mock模拟数据
-│   │   ├── index.ts
-│   │   ├── role.ts                             # 角色接口
-│   │   ├── user.ts                             # 用户接口
-│   │   └── ...
-│   ├── router                                  # 路由
-│   │   ├── index.ts
-│   │   └── ...
-│   ├── stores                                  # 状态管理
-│   │   ├── index.ts
-│   │   └── ...
-│   ├── styles                                  # 全局样式
-│   │   ├── index.scss
-│   │   └── ...
-│   ├── typings                                 # 全局类型
-│   │   ├── index.scss
-│   │   └── ...
-│   ├── views     
-│   │   ├── flowDesign                          # 流程设计器     
-│   │   │   ├── nodes                           # 流程节点  
-│   │   │   │   ├── Add.vue                     # 添加节点
-│   │   │   │   ├── ApprovalNode.vue            # 审批人节点
-│   │   │   │   ├── CcNode.vue                  # 抄送人节点
-│   │   │   │   ├── ConditionNode.vue           # 条件节点
-│   │   │   │   ├── EndNode.vue                 # 结束节点
-│   │   │   │   ├── ExclusiveNode.vue           # 互斥分支节点
-│   │   │   │   ├── GatewayNode.vue             # 网关节点
-│   │   │   │   ├── Node.vue                    # 节点
-│   │   │   │   ├── StartNode.vue               # 开始节点
-│   │   │   │   ├── NotifyNode.vue              # 消息通知节点
-│   │   │   │   ├── TimerNode.vue               # 计时等待节点
-│   │   │   │   ├── TreeNode.vue                # 节点树
-│   │   │   │   └── type.ts                     # 节点类型
-│   │   │   ├── panels                          # 属性面板  
-│   │   │   │   ├── ApprovalPanel.vue           # 审批人配置面板
-│   │   │   │   ├── CcPanel.vue                 # 抄送人配置面板
-│   │   │   │   ├── ConditionPanel.vue          # 条件配置面板
-│   │   │   │   ├── index.vue                   # 属性面板抽屉
-│   │   │   │   ├── StartPanel.vue              # 开始配置面板
-│   │   │   │   ├── NotifyPanel.vue             # 消息通知配置面板
-│   │   │   │   └── TimerPanel.vue              # 计时等待配置面板
-│   │   ├── home                                # 首页
-│   │   └── ...
-│   ├── App.vue
-│   ├── main.ts
-│   └── shims-vue.d.ts
-├── .gitignore
-├── package.json
-├── README.md
-├── unocss.config.ts
-└── vite.config.ts
-~~~
+## 快速开始
+### 1. 安装依赖
+```bash
+npm install
+```
 
+### 2. 启动开发环境
+```bash
+npm run dev
+```
 
-## 添加微信好友拉入群聊（备注：加群）
+### 3. 构建
+```bash
+npm run build
+```
+
+### 4. 预览构建产物
+```bash
+npm run preview
+```
+
+## 常用脚本
+```bash
+npm run dev         # 本地开发
+npm run build       # 生产构建（含类型检查）
+npm run build:dev   # development 模式构建
+npm run build:test  # test 模式构建
+npm run preview     # 预览构建产物
+npm run type-check  # 类型检查
+npm run lint        # ESLint（自动修复）
+npm run format      # Prettier 格式化（src）
+```
+
+## 项目结构
+```text
+.
+|-- public/
+|-- src/
+|   |-- api/
+|   |-- assets/
+|   |-- components/
+|   |-- hooks/
+|   |-- mock/
+|   |-- router/
+|   |-- stores/
+|   |-- styles/
+|   |-- typings/
+|   |-- views/
+|   |   |-- flowDesign/
+|   |   |   |-- nodes/
+|   |   |   |-- panels/
+|   |   |   `-- index.vue
+|   |-- App.vue
+|   `-- main.ts
+|-- package.json
+|-- vite.config.ts
+`-- README.md
+```
+
+## 源码仓库
+| 平台 | 前端 | 后端转换器 |
+| --- | --- | --- |
+| GitHub | <https://github.com/tsai996/lowflow-design> | <https://github.com/tsai996/lowflow-design-converter> |
+| Gitee | <https://gitee.com/cai_xiao_feng/lowflow-design> | <https://gitee.com/cai_xiao_feng/lowflow-design-converter> |
+
+## 交流与支持
+### 交流群
 <p>
-    <img alt="微信" src="public/wx.jpg" width="240" height="400" style="display: inline-block"/>
-    <img alt="QQ群" src="public/qq_qun.jpg" width="240" height="400" style="display: inline-block"/>
+  <img alt="微信" src="public/wx.jpg" width="240" height="400" style="display: inline-block"/>
+  <img alt="QQ群" src="public/qq_qun.jpg" width="240" height="400" style="display: inline-block"/>
 </p>
 
-**求一份内推岗位**
-## 赞助
+### 赞助
+如果这个项目对你有帮助，欢迎赞助支持。
 
-开源不易如果该项目对您有帮助，您可以请我喝杯奶茶。
 <p>
-    <img alt="微信" src="public/wxpay.png" height="240" width="240" style="display: inline-block"/>
-    <img alt="支付宝" src="public/alipay.png" height="240" width="240" style="display: inline-block"/>
+  <img alt="微信赞助" src="public/wxpay.png" height="240" width="240" style="display: inline-block"/>
+  <img alt="支付宝赞助" src="public/alipay.png" height="240" width="240" style="display: inline-block"/>
 </p>
 
-## 推荐
+## 推荐阅读
+推荐搭配阅读《深入 Flowable 流程引擎：核心原理与高阶实战》：
+<https://item.jd.com/14804836.html>
 
-大家在使用本项目时，推荐结合贺波老师的书
-[《深入Flowable流程引擎：核心原理与高阶实战》](https://item.jd.com/14804836.html)学习。这本书得到了Flowable创始人Tijs Rademakers亲笔作序推荐，对系统学习和深入掌握Flowable的用法非常有帮助。
-![flowable.jpg](public%2Fflowable.jpg)
+![flowable](public/flowable.jpg)

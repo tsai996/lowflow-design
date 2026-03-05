@@ -138,6 +138,7 @@ defineExpose({
   <el-dialog
     v-model="dialogVisible"
     @open="onOpen"
+    :lock-scroll="false"
     align-center
     draggable
     title="选择角色"

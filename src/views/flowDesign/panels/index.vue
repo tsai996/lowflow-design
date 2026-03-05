@@ -34,7 +34,7 @@ const onClickOutside = () => {
 </script>
 
 <template>
-  <el-drawer v-model="penalVisible" size="35%">
+  <el-drawer v-model="penalVisible" :lock-scroll="false" size="35%">
     <template #header="{ titleId, titleClass }">
       <span :id="titleId" :class="titleClass">
         <el-input
