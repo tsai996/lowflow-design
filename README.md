@@ -127,7 +127,7 @@ src/
 
 ## Maintainer
 
-This project was created and is solely maintained by [@tsai996](https://github.com/tsai996). Some historical commits may appear under `caidefeng`, an earlier local Git identity used by the maintainer; it is not a separate repository collaborator.
+This project was created and is solely maintained by [@tsai996](https://github.com/tsai996).
 
 ## Community and Support
 

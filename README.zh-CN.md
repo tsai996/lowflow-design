@@ -127,7 +127,7 @@ src/
 
 ## 维护者
 
-本项目由 [@tsai996](https://github.com/tsai996) 创建并独立维护。部分历史提交可能显示为维护者早期使用的本地 Git 身份 `caidefeng`；它并不是独立的仓库协作者。
+本项目由 [@tsai996](https://github.com/tsai996) 创建并独立维护。
 
 ## 交流与支持
 

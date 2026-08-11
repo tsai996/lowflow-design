@@ -1,0 +1,41 @@
+name: Feature request
+description: Propose a focused improvement for lowflow-design.
+title: '[Feature]: '
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What workflow-design or integration problem should be solved?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the smallest useful behavior and any alternatives considered.
+    validations:
+      required: true
+  - type: textarea
+    id: users
+    attributes:
+      label: Users and use case
+      description: Who needs this and how would they use it?
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Workflow compatibility
+      description: Note any changes to workflow JSON, node types, BPMN conversion, APIs, or translations.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and discussions for similar requests.
+          required: true
+        - label: I can help test or implement this change.
+          required: false
