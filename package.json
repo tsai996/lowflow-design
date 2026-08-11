@@ -2,6 +2,7 @@
   "name": "lowflow-design",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@10.34.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -53,5 +54,11 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-tsc": "^2.0.11"
+  },
+  "pnpm": {
+    "overrides": {
+      "defu@<=6.1.4": "6.1.7",
+      "postcss@>=8.4.0 <8.5.23": "8.5.26"
+    }
   }
 }
