@@ -101,24 +101,33 @@ watchEffect(() => {
           <template #header>
             <el-checkbox v-model="allReadonly" :label="$t('只读')" />
           </template>
-          <template #default="{ row }">
-            <el-checkbox v-model="row.readonly" @change="changeReadonly(row)" />
+          <template #default="{ row, $index }">
+            <el-checkbox
+              v-model="row.readonly"
+              @change="changeReadonly(activeData.formProperties[$index])"
+            />
           </template>
         </el-table-column>
         <el-table-column prop="required">
           <template #header>
             <el-checkbox v-model="allRequired" :label="$t('必填')" />
           </template>
-          <template #default="{ row }">
-            <el-checkbox v-model="row.required" @change="changeRequired(row)" />
+          <template #default="{ row, $index }">
+            <el-checkbox
+              v-model="row.required"
+              @change="changeRequired(activeData.formProperties[$index])"
+            />
           </template>
         </el-table-column>
         <el-table-column prop="hidden">
           <template #header>
             <el-checkbox v-model="allHidden" :label="$t('隐藏')" />
           </template>
-          <template #default="{ row }">
-            <el-checkbox v-model="row.hidden" @change="changeHidden(row)" />
+          <template #default="{ row, $index }">
+            <el-checkbox
+              v-model="row.hidden"
+              @change="changeHidden(activeData.formProperties[$index])"
+            />
           </template>
         </el-table-column>
       </el-table>

@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 迁出代码
+        uses: actions/checkout@v7.0.1
+      - name: 使用 pnpm
+        uses: pnpm/action-setup@v6.0.10
+        with:
+          version: 10.34.4
+      - name: 安装 Node.js
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 22
+          cache: 'pnpm'
+      - name: 验证 Tag 与项目版本
+        shell: bash
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if [[ ! "${TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Tag must match vX.Y.Z"
+            exit 1
+          fi
+
+          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
+          if [[ "${TAG#v}" != "${PACKAGE_VERSION}" ]]; then
+            echo "::error::Tag ${TAG} does not match package version ${PACKAGE_VERSION}"
+            exit 1
+          fi
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+      - name: 验证构建
+        run: pnpm build
+      - name: 创建 GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "${GITHUB_REF_NAME}"
+          --verify-tag
+          --generate-notes
+          --title "lowflow-design ${GITHUB_REF_NAME}"
