@@ -72,8 +72,8 @@ const delGroup = (index: number) => {
         style="--el-switch-on-color: #409eff; --el-switch-off-color: #67c23a"
         active-value="and"
         inactive-value="or"
-        active-text="且"
-        inactive-text="或"
+        :active-text="$t('且')"
+        :inactive-text="$t('或')"
       />
     </div>
     <div class="filter-option-content">
@@ -124,7 +124,7 @@ const delGroup = (index: number) => {
           :filterFields="filterFields"
         >
           <el-button @click="delGroup(index)" icon="CircleClose" class="filter-filter-item__add">
-            删除条件组
+            {{ $t('删除条件组') }}
           </el-button>
         </AdvancedFilter>
         <div
@@ -134,10 +134,10 @@ const delGroup = (index: number) => {
       </el-form>
       <div class="filter-item-rule">
         <el-button @click="addRule" icon="CirclePlus" class="filter-filter-item__add">
-          添加条件
+          {{ $t('添加条件') }}
         </el-button>
         <el-button @click="addGroup" icon="CirclePlus" class="filter-filter-item__add">
-          添加条件组
+          {{ $t('添加条件组') }}
         </el-button>
         <slot />
       </div>

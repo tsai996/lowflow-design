@@ -14,6 +14,9 @@ import type {
 import type { FilterRules } from '@/components/AdvancedFilter/type'
 import type { Field } from '@/components/Render/type'
 import { useDraggableScroll } from '@/hooks/useDraggableScroll'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
 
 const props = withDefaults(
   defineProps<{
@@ -55,6 +58,65 @@ const activeData = ref<FlowNode>({
 })
 const penalVisible = ref(false)
 const nodesError = ref<Recordable<ErrorInfo[]>>({})
+const defaultNames = new WeakMap<
+  FlowNode,
+  { key: string; params?: Record<string, number>; value: string }
+>()
+
+const rememberDefaultName = (node: FlowNode, key: string, params?: Record<string, number>) => {
+  const value = params ? t(key, params) : t(key)
+  node.name = value
+  defaultNames.set(node, { key, params, value })
+}
+
+const walkNodes = (node: FlowNode, visit: (node: FlowNode, branchIndex?: number) => void) => {
+  visit(node)
+  if ('branches' in node) {
+    ;(node as BranchNode).branches.forEach((branch, index) => {
+      visit(branch, index + 1)
+      if (branch.next) walkNodes(branch.next, visit)
+    })
+  }
+  if (node.next) walkNodes(node.next, visit)
+}
+
+const registerExistingDefaultNames = () => {
+  const keys: Partial<Record<NodeType, string>> = {
+    start: '发起人',
+    end: '流程结束',
+    exclusive: '独占网关',
+    cc: '抄送人',
+    timer: '计时等待',
+    notify: '消息通知',
+    service: '服务节点',
+    approval: '审批人'
+  }
+  walkNodes(props.process, (node, branchIndex) => {
+    const key =
+      node.type === 'condition'
+        ? (node as ConditionNode).def
+          ? '默认条件'
+          : '条件{index}'
+        : keys[node.type]
+    if (!key) return
+    const params = key === '条件{index}' ? { index: branchIndex || 1 } : undefined
+    const value = params ? t(key, params) : t(key)
+    if (node.name === value) defaultNames.set(node, { key, params, value })
+  })
+}
+
+registerExistingDefaultNames()
+watch(locale, () => {
+  walkNodes(props.process, (node) => {
+    const current = defaultNames.get(node)
+    if (!current) return
+    if (node.name !== current.value) {
+      defaultNames.delete(node)
+      return
+    }
+    rememberDefaultName(node, current.key, current.params)
+  })
+})
 
 const designerContainerRef = ref<HTMLElement | null>(null)
 useDraggableScroll(designerContainerRef)
@@ -98,10 +160,11 @@ const addExclusive = (node: FlowNode) => {
     id: id,
     pid: node.id,
     type: 'exclusive',
-    name: '独占网关',
+    name: '',
     next: next,
     branches: []
   } as ExclusiveNode
+  rememberDefaultName(exclusiveNode, '独占网关')
   if (next) {
     next.pid = id
   }
@@ -111,33 +174,36 @@ const addExclusive = (node: FlowNode) => {
   if (exclusiveNode.branches.length > 0) {
     const condition = exclusiveNode.branches[exclusiveNode.branches.length - 1] as ConditionNode
     condition.def = true
-    condition.name = '默认条件'
+    rememberDefaultName(condition, '默认条件')
   }
 }
 const addCondition = (node: FlowNode) => {
   const exclusive = node as ExclusiveNode
-  exclusive.branches.splice(exclusive.branches.length - 1, 0, {
+  const conditionIndex = exclusive.branches.length + 1
+  const condition = {
     id: nextId(),
     pid: exclusive.id,
     type: 'condition',
     def: false,
-    name: `条件${exclusive.branches.length + 1}`,
+    name: '',
     conditions: {
       operator: 'and',
       conditions: [],
       groups: []
     } as FilterRules,
     next: undefined
-  })
+  } as ConditionNode
+  rememberDefaultName(condition, '条件{index}', { index: conditionIndex })
+  exclusive.branches.splice(exclusive.branches.length - 1, 0, condition)
 }
 const addCc = (node: FlowNode) => {
   const next = node.next
   const id = nextId()
-  node.next = {
+  const ccNode = {
     id: id,
     pid: node.id,
     type: 'cc',
-    name: '抄送人',
+    name: '',
     next: next,
     assigneeType: 'user',
     formUser: '',
@@ -150,6 +216,8 @@ const addCc = (node: FlowNode) => {
     self: false,
     formProperties: []
   } as CcNode
+  rememberDefaultName(ccNode, '抄送人')
+  node.next = ccNode
   if (next) {
     next.pid = id
   }
@@ -157,10 +225,10 @@ const addCc = (node: FlowNode) => {
 const addTimer = (node: FlowNode) => {
   const next = node.next
   const id = nextId()
-  node.next = {
+  const timerNode = {
     id: id,
     pid: node.id,
-    name: '计时等待',
+    name: '',
     type: 'timer',
     next: next,
     waitType: 'duration',
@@ -168,6 +236,8 @@ const addTimer = (node: FlowNode) => {
     duration: 0,
     timeDate: undefined
   } as TimerNode
+  rememberDefaultName(timerNode, '计时等待')
+  node.next = timerNode
   if (next) {
     next.pid = id
   }
@@ -176,10 +246,10 @@ const addTimer = (node: FlowNode) => {
 const addNotify = (node: FlowNode) => {
   const next = node.next
   const id = nextId()
-  node.next = {
+  const notifyNode = {
     id: id,
     pid: node.id,
-    name: '消息通知',
+    name: '',
     type: 'notify',
     next: next,
     assigneeType: 'user',
@@ -195,6 +265,8 @@ const addNotify = (node: FlowNode) => {
     subject: '',
     content: ''
   } as NotifyNode
+  rememberDefaultName(notifyNode, '消息通知')
+  node.next = notifyNode
   if (next) {
     next.pid = id
   }
@@ -202,15 +274,17 @@ const addNotify = (node: FlowNode) => {
 const addService = (node: FlowNode) => {
   const next = node.next
   const id = nextId()
-  node.next = {
+  const serviceNode = {
     id: id,
     pid: node.id,
     type: 'service',
-    name: '服务节点',
+    name: '',
     next: next,
     implementationType: '',
     implementation: ''
   } as ServiceNode
+  rememberDefaultName(serviceNode, '服务节点')
+  node.next = serviceNode
   if (next) {
     next.pid = id
   }
@@ -218,11 +292,11 @@ const addService = (node: FlowNode) => {
 const addApproval = (node: FlowNode) => {
   const next = node.next
   const id = nextId()
-  node.next = {
+  const approvalNode = {
     id: id,
     pid: node.id,
     type: 'approval',
-    name: '审批人',
+    name: '',
     executionListeners: [],
     next: next,
     // 属性
@@ -250,6 +324,8 @@ const addApproval = (node: FlowNode) => {
       minusMulti: false
     }
   } as ApprovalNode
+  rememberDefaultName(approvalNode, '审批人')
+  node.next = approvalNode
   if (next) {
     next.pid = id
   }
@@ -342,11 +418,11 @@ defineExpose({
     </div>
     <!--放大/缩小-->
     <div class="zoom">
-      <el-tooltip content="放大" placement="bottom-start">
+      <el-tooltip :content="t('放大')" placement="bottom-start">
         <el-button icon="plus" @click="zoom += 10" :disabled="zoom >= 170" circle></el-button>
       </el-tooltip>
       <span>{{ zoom }}%</span>
-      <el-tooltip content="缩小" placement="bottom-start">
+      <el-tooltip :content="t('缩小')" placement="bottom-start">
         <el-button icon="minus" @click="zoom -= 10" circle :disabled="zoom <= 50"></el-button>
       </el-tooltip>
     </div>

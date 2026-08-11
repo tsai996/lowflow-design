@@ -87,19 +87,19 @@ watchEffect(() => {
 
 <template>
   <el-tabs v-model="activeName" stretch class="el-segmented">
-    <el-tab-pane label="基础设置" name="basicSettings">
+    <el-tab-pane :label="$t('基础设置')" name="basicSettings">
       <el-form label-position="top" label-width="90px">
-        <el-form-item prop="executionListeners" label="执行监听器">
+        <el-form-item prop="executionListeners" :label="$t('执行监听器')">
           <ExecutionListeners :node="activeData" />
         </el-form-item>
       </el-form>
     </el-tab-pane>
-    <el-tab-pane label="表单权限" name="formPermissions">
+    <el-tab-pane :label="$t('表单权限')" name="formPermissions">
       <el-table :data="activeData.formProperties">
-        <el-table-column prop="name" label="字段" />
+        <el-table-column prop="name" :label="$t('字段')" />
         <el-table-column prop="readonly">
           <template #header>
-            <el-checkbox v-model="allReadonly" label="只读" />
+            <el-checkbox v-model="allReadonly" :label="$t('只读')" />
           </template>
           <template #default="{ row }">
             <el-checkbox v-model="row.readonly" @change="changeReadonly(row)" />
@@ -107,7 +107,7 @@ watchEffect(() => {
         </el-table-column>
         <el-table-column prop="required">
           <template #header>
-            <el-checkbox v-model="allRequired" label="必填" />
+            <el-checkbox v-model="allRequired" :label="$t('必填')" />
           </template>
           <template #default="{ row }">
             <el-checkbox v-model="row.required" @change="changeRequired(row)" />
@@ -115,7 +115,7 @@ watchEffect(() => {
         </el-table-column>
         <el-table-column prop="hidden">
           <template #header>
-            <el-checkbox v-model="allHidden" label="隐藏" />
+            <el-checkbox v-model="allHidden" :label="$t('隐藏')" />
           </template>
           <template #default="{ row }">
             <el-checkbox v-model="row.hidden" @change="changeHidden(row)" />

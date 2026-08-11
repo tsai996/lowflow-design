@@ -141,14 +141,14 @@ defineExpose({
     :lock-scroll="false"
     align-center
     draggable
-    title="选择角色"
+    :title="$t('选择角色')"
     width="30%"
   >
     <el-card shadow="never" class="org-card">
       <template #header>
         <el-input
           v-model="queryForm.name"
-          placeholder="输入关键字进行查询"
+          :placeholder="$t('输入关键字进行查询')"
           :style="{ width: '100%' }"
           suffix-icon="search"
           clearable
@@ -182,8 +182,8 @@ defineExpose({
       </el-scrollbar>
     </el-card>
     <template #footer>
-      <el-button @click="dialogVisible = false">取消</el-button>
-      <el-button type="primary" @click="handelConfirm">确认</el-button>
+      <el-button @click="dialogVisible = false">{{ $t('取消') }}</el-button>
+      <el-button type="primary" @click="handelConfirm">{{ $t('确认') }}</el-button>
     </template>
   </el-dialog>
 </template>

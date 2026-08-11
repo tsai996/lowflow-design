@@ -4,35 +4,35 @@ import type { ResultData } from '@/api'
 const roleList = [
   {
     id: '1',
-    name: '项目经理'
+    name: 'Operations Lead'
   },
   {
     id: '2',
-    name: '产品经理'
+    name: 'Product Strategist'
   },
   {
     id: '3',
-    name: '高级开发工程师'
+    name: 'Solutions Architect'
   },
   {
     id: '4',
-    name: '中级开发工程师'
+    name: 'Quality Analyst'
   },
   {
     id: '5',
-    name: '项目总监'
+    name: 'Program Director'
   },
   {
     id: '6',
-    name: '产品策划'
+    name: 'Growth Specialist'
   },
   {
     id: '7',
-    name: '客服'
+    name: 'Customer Advocate'
   },
   {
     id: '8',
-    name: '销售经理'
+    name: 'Account Executive'
   }
 ]
 

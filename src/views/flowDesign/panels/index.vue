@@ -45,7 +45,7 @@ const onClickOutside = () => {
           v-show="showInput"
         ></el-input>
         <el-link icon="EditPen" v-show="!showInput" @click="showInput = true">
-          {{ activeData?.name || '节点配置' }}
+          {{ activeData?.name || $t('节点配置') }}
         </el-link>
       </span>
     </template>

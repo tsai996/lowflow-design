@@ -15,7 +15,7 @@ const data = useVModel($props, 'modelValue', $emits)
 </script>
 
 <template>
-  <el-select class="trigger-container" v-model="data" filterable placeholder="选择字段">
+  <el-select class="trigger-container" v-model="data" filterable :placeholder="$t('选择字段')">
     <el-option v-for="item in $props.options" :key="item.id" :label="item.label" :value="item.id" />
   </el-select>
 </template>

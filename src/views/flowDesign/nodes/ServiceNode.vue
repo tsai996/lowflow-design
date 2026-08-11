@@ -2,6 +2,9 @@
 import Node from './Node.vue'
 import type { ErrorInfo, ServiceNode } from './type'
 import type { Ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   node: ServiceNode
@@ -14,13 +17,13 @@ watchEffect(() => {
   const errors: ErrorInfo[] = []
   const { id, name, implementationType, implementation } = props.node
   if (!implementationType) {
-    errors.push({ id: id, name: name, message: '执行类型为空' })
-    content.value = '执行类型为空'
+    errors.push({ id: id, name: name, message: t('执行类型为空') })
+    content.value = t('执行类型为空')
   } else if (!implementation) {
-    errors.push({ id: id, name: name, message: '执行值为空' })
-    content.value = '执行值为空'
+    errors.push({ id: id, name: name, message: t('执行值为空') })
+    content.value = t('执行值为空')
   } else {
-    content.value = `执行服务`
+    content.value = t('执行服务')
   }
   // 记录错误
   if (errors.length > 0) {

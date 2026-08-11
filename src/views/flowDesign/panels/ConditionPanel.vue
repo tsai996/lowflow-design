@@ -2,17 +2,20 @@
 import type { ConditionNode } from '../nodes/type'
 import type { Ref } from 'vue'
 import type { Field } from '@/components/Render/type'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const { fields } = inject<{ fields: Ref<Field[]> }>('flowDesign', { fields: ref([]) })
 defineProps<{
   activeData: ConditionNode
 }>()
-const initialFormFields = ref<Field[]>([
+const initialFormFields = computed<Field[]>(() => [
   {
     id: 'initiator',
     name: 'UserSelector',
     type: 'formItem',
-    label: '发起人',
+    label: t('发起人'),
     value: null,
     readonly: false,
     required: true,
@@ -20,7 +23,7 @@ const initialFormFields = ref<Field[]>([
     props: {
       key: undefined,
       multiple: false,
-      placeholder: '请选择发起人',
+      placeholder: t('请选择发起人'),
       class: [],
       style: {
         width: '100%'

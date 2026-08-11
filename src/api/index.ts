@@ -6,6 +6,7 @@ import axios, {
   type AxiosResponse
 } from 'axios'
 import { ElNotification } from 'element-plus'
+import i18n from '@/languages'
 
 export interface Result {
   code: number
@@ -51,7 +52,7 @@ class RequestHttp {
         const { response, message } = error
         const data = response?.data as ResultData
         const errMsg = data ? data.message : message
-        ElNotification.error(errMsg || '未知错误')
+        ElNotification.error(errMsg || i18n.global.t('未知错误'))
         return Promise.reject(response?.data || error)
       }
     )

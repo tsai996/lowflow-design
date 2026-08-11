@@ -4,49 +4,49 @@ import type { ResultData } from '@/api'
 const userList = [
   {
     id: 1,
-    name: '张三',
+    name: 'Ethan Carter',
     username: 'admin',
     avatar: 'https://avatars.githubusercontent.com/u/44080404?v=4'
   },
   {
     id: 2,
-    name: '李四',
+    name: 'Olivia Bennett',
     username: 'lisi',
     avatar: 'https://avatars.githubusercontent.com/u/44080404?v=4'
   },
   {
     id: 3,
-    name: '王五',
+    name: 'Liam Foster',
     username: 'wangwu',
     avatar: 'https://avatars.githubusercontent.com/u/44080404?v=4'
   },
   {
     id: 4,
-    name: '赵六',
+    name: 'Emma Collins',
     username: 'zhaoliu',
     avatar: 'https://avatars.githubusercontent.com/u/44080404?v=4'
   },
   {
     id: 5,
-    name: '孙七',
+    name: 'Noah Mitchell',
     username: 'sunqi',
     avatar: 'https://avatars.githubusercontent.com/u/44080404?v=4'
   },
   {
     id: 6,
-    name: '周八',
+    name: 'Ava Turner',
     username: 'zhouba',
     avatar: 'https://avatars.githubusercontent.com/u/44080404?v=4'
   },
   {
     id: 7,
-    name: '吴九',
+    name: 'Mason Brooks',
     username: 'wujui',
     avatar: 'https://avatars.githubusercontent.com/u/44080404?v=4'
   },
   {
     id: 8,
-    name: '郑十',
+    name: 'Sophia Reed',
     username: 'zhengshi',
     avatar: 'https://avatars.githubusercontent.com/u/44080404?v=4'
   }

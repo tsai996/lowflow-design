@@ -4,6 +4,9 @@ import UserTag from './UserTag.vue'
 import UserPicker, { type ModelValueType } from './UserPicker.vue'
 import { useFormDisabled, useFormSize } from 'element-plus'
 import { type CSSProperties } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 export interface UserSelectorProps {
   modelValue: ModelValueType
@@ -15,12 +18,12 @@ export interface UserSelectorProps {
 
 const $props = withDefaults(defineProps<UserSelectorProps>(), {
   multiple: false,
-  disabled: false,
-  placeholder: '请选择用户'
+  disabled: false
 })
 const $emits = defineEmits<{
   (e: 'update:modelValue', modelValue: ModelValueType): void
 }>()
+const placeholder = computed(() => $props.placeholder || t('请选择用户'))
 const value = useVModel($props, 'modelValue', $emits)
 const valueArr = computed<string[]>(() => {
   if (!value.value) return []

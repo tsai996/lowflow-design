@@ -66,17 +66,17 @@ watchEffect(() => {
 
 <template>
   <el-tabs v-model="activeName" stretch class="el-segmented">
-    <el-tab-pane label="抄送人" name="properties">
+    <el-tab-pane :label="$t('抄送人')" name="properties">
       <el-form label-position="top" label-width="90px">
         <AssigneePanel :active-data="activeData" :fields="fields" type="抄送" />
       </el-form>
     </el-tab-pane>
-    <el-tab-pane label="表单权限" name="formPermissions">
+    <el-tab-pane :label="$t('表单权限')" name="formPermissions">
       <el-table :data="activeData.formProperties">
-        <el-table-column prop="name" label="字段" />
+        <el-table-column prop="name" :label="$t('字段')" />
         <el-table-column prop="readonly">
           <template #header>
-            <el-checkbox v-model="allReadonly" label="只读" />
+            <el-checkbox v-model="allReadonly" :label="$t('只读')" />
           </template>
           <template #default="{ row }">
             <el-checkbox v-model="row.readonly" @change="changeReadonly(row)" />
@@ -84,7 +84,7 @@ watchEffect(() => {
         </el-table-column>
         <el-table-column prop="hidden">
           <template #header>
-            <el-checkbox v-model="allHidden" label="隐藏" />
+            <el-checkbox v-model="allHidden" :label="$t('隐藏')" />
           </template>
           <template #default="{ row }">
             <el-checkbox v-model="row.hidden" @change="changeHidden(row)" />

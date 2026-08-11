@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <el-form label-position="top" label-width="90px">
-    <el-form-item prop="executionListeners" label="执行监听器">
+    <el-form-item prop="executionListeners" :label="$t('执行监听器')">
       <ExecutionListeners :node="activeData" />
     </el-form-item>
   </el-form>

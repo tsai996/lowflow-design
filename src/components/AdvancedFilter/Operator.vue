@@ -1,27 +1,30 @@
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const $props = defineProps<{
   modelValue: string
 }>()
-const operatorOptions = [
+const operatorOptions = computed(() => [
   {
     value: 'eq',
-    label: '等于'
+    label: t('等于')
   },
   {
     value: 'ne',
-    label: '不等于'
+    label: t('不等于')
   },
   {
-    label: '包含',
+    label: t('包含'),
     value: 'in'
   },
   {
-    label: '不包含',
+    label: t('不包含'),
     value: 'ni'
   }
-]
+])
 const $emits = defineEmits<{
   (e: 'update:modelValue', modelValue: any): void
 }>()
@@ -29,7 +32,7 @@ const data = useVModel($props, 'modelValue', $emits)
 </script>
 
 <template>
-  <el-select class="operator-container" v-model="data" filterable placeholder="筛选符">
+  <el-select class="operator-container" v-model="data" filterable :placeholder="t('筛选符')">
     <el-option
       v-for="item in operatorOptions"
       :key="item.value"

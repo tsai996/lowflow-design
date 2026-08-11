@@ -3,6 +3,9 @@ import type { ErrorInfo, FlowNode, NodeType } from './type'
 import { ClickOutside as vClickOutside, type InputInstance } from 'element-plus'
 import Add from './Add.vue'
 import type { Ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const _inject = inject<{
   readOnly?: Ref<boolean>
@@ -62,7 +65,7 @@ const delNode = () => {
         <!--删除按钮-->
         <span @click.stop>
           <el-popconfirm
-            title="您确定要删除该节点吗？"
+            :title="t('您确定要删除该节点吗？')"
             width="200"
             :hide-after="0"
             placement="right-start"

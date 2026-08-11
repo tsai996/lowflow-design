@@ -3,6 +3,9 @@ import Node from './Node.vue'
 import type { TimerNode } from './type'
 import type { Ref } from 'vue'
 import type { ErrorInfo } from './type'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   node: TimerNode
@@ -23,14 +26,14 @@ watchEffect(() => {
   const errors: ErrorInfo[] = []
   const { id, name, waitType, unit, duration, timeDate } = props.node
   if (waitType === 'date') {
-    content.value = `等至 ${timeDate || '?'}`
+    content.value = t('等至 {date}', { date: timeDate || '?' })
     if (!timeDate) {
-      errors.push({ id: id, name: name, message: '未设置等待时间' })
+      errors.push({ id: id, name: name, message: t('未设置等待时间') })
     }
   } else if (waitType === 'duration') {
-    content.value = `等待 ${duration} ${unitMap[unit]}`
+    content.value = t('等待 {duration} {unit}', { duration, unit: t(unitMap[unit]) })
     if (duration <= 0) {
-      errors.push({ id: id, name: name, message: '未设置等待时长' })
+      errors.push({ id: id, name: name, message: t('未设置等待时长') })
     }
   }
   // 记录错误

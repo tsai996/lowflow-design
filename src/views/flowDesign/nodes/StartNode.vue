@@ -3,6 +3,9 @@ import Node from './Node.vue'
 import type { StartNode } from './type'
 import type { ErrorInfo } from './type'
 import type { Ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const props = defineProps<{
   node: StartNode
@@ -14,7 +17,7 @@ watchEffect(() => {
   const errors: ErrorInfo[] = []
   const { id, name, next } = props.node
   if (next?.type === 'end') {
-    errors.push({ id: id, name: name, message: '发起下节点为空' })
+    errors.push({ id: id, name: name, message: t('发起下节点为空') })
   }
   // 记录错误
   if (errors.length > 0) {
@@ -28,7 +31,7 @@ watchEffect(() => {
 <template>
   <div class="start-node">
     <Node v-bind="$attrs" icon="el:List" :close="false" color="#8c7cf3" :node="node">
-      <el-text>发起人</el-text>
+      <el-text>{{ t('发起人') }}</el-text>
     </Node>
   </div>
 </template>

@@ -2,6 +2,9 @@
 import type { PopoverInstance } from 'element-plus'
 import type { NodeType } from './type'
 import type { Ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const { readOnly } = inject<{
   readOnly?: Ref<boolean>
@@ -42,33 +45,33 @@ const addServiceNode = () => {
       placement="bottom-start"
       ref="popoverRef"
       trigger="click"
-      title="添加节点"
+      :title="t('添加节点')"
       :width="336"
     >
       <el-space wrap>
         <div class="node-select" @click="addApprovalNode">
           <svg-icon name="el:Stamp" />
-          <el-text>审批人</el-text>
+          <el-text>{{ t('审批人') }}</el-text>
         </div>
         <div class="node-select" @click="addCcNode">
           <svg-icon name="el:Promotion" />
-          <el-text>抄送人</el-text>
+          <el-text>{{ t('抄送人') }}</el-text>
         </div>
         <div class="node-select" @click="addExclusiveNode">
           <svg-icon name="el:Share" />
-          <el-text>互斥分支</el-text>
+          <el-text>{{ t('互斥分支') }}</el-text>
         </div>
         <div class="node-select" @click="addTimerNode">
           <svg-icon name="el:Timer" />
-          <el-text>计时等待</el-text>
+          <el-text>{{ t('计时等待') }}</el-text>
         </div>
         <div class="node-select" @click="addNotifyNode">
           <svg-icon name="el:BellFilled" />
-          <el-text>消息通知</el-text>
+          <el-text>{{ t('消息通知') }}</el-text>
         </div>
         <div class="node-select" @click="addServiceNode">
           <svg-icon name="el:Tools" />
-          <el-text>服务节点</el-text>
+          <el-text>{{ t('服务节点') }}</el-text>
         </div>
       </el-space>
       <template #reference>

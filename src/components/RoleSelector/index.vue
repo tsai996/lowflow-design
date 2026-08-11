@@ -4,6 +4,9 @@ import RoleTag from './RoleTag.vue'
 import RolePicker, { type ModelValueType } from './RolePicker.vue'
 import { useFormDisabled, useFormSize } from 'element-plus'
 import type { CSSProperties } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 export interface RoleSelectorProps {
   modelValue: ModelValueType
@@ -15,12 +18,12 @@ export interface RoleSelectorProps {
 
 const $props = withDefaults(defineProps<RoleSelectorProps>(), {
   multiple: false,
-  disabled: false,
-  placeholder: '请选择角色'
+  disabled: false
 })
 const $emits = defineEmits<{
   (e: 'update:modelValue', modelValue: ModelValueType): void
 }>()
+const placeholder = computed(() => $props.placeholder || t('请选择角色'))
 const value = useVModel($props, 'modelValue', $emits)
 const valueArr = computed<string[]>(() => {
   if (!value.value) return []
